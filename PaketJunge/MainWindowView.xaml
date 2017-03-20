@@ -1,0 +1,67 @@
+﻿<Window x:Class="PaketJunge.View.MainWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:v="clr-namespace:PaketJunge.View"
+        xmlns:vm="clr-namespace:PaketJunge.ViewModel;assembly=PaketJunge.ViewModel" 
+		Title="Paket, Junge!" Width="1280" Height="720" Background="LightBlue" FontSize="15px" FontWeight="Bold" WindowState="Maximized" Foreground="#222" Icon="pack://siteoforigin:,,,/Resources/PaketJunge.png">
+
+	<Window.DataContext>
+		<vm:MainWindowViewModel/>
+	</Window.DataContext>
+
+    <Window.Resources>
+        <v:ViewTemplateSelector x:Key="ViewTemplateSelector"/>
+    </Window.Resources>
+
+    <StackPanel>
+        <StackPanel Margin="30 10 30 0" Orientation="Horizontal">
+            <Image Margin="0 0 5 0" Width="24" Source="pack://siteoforigin:,,,/Resources/PaketJunge.png"/>
+            <TextBlock FontSize="20px" Text="Paket, Junge!"/>
+        </StackPanel>
+        
+        <TextBlock FontWeight="Medium" Margin="30 0 0 30" Text="Build your paket and click send."/>
+
+        <Grid Margin="30 0 30 30">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="8*"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="8*"/>
+			</Grid.ColumnDefinitions>
+
+			<StackPanel Grid.Column="0">
+				<GroupBox BorderThickness="0" Header="Layer 1" MinHeight="100px">
+					<ContentPresenter Name="Layer1" HorizontalAlignment="Left" Content="{Binding Layer1}" ContentTemplateSelector="{StaticResource ViewTemplateSelector}"/>
+				</GroupBox>
+
+                <GroupBox BorderThickness="0" Header="Layer 2" MinHeight="100px">
+					<ContentPresenter Name="Layer2" HorizontalAlignment="Left" Content="{Binding Layer2}" ContentTemplateSelector="{StaticResource ViewTemplateSelector}"/>
+				</GroupBox>
+
+                <GroupBox BorderThickness="0" Header="Layer 3" MinHeight="100px">
+					<ContentPresenter Name="Layer3" HorizontalAlignment="Left" Content="{Binding Layer3}" ContentTemplateSelector="{StaticResource ViewTemplateSelector}"/>
+				</GroupBox>
+
+                <GroupBox BorderThickness="0" Header="Layer 4" MinHeight="100px">
+					<ContentPresenter Name="Layer4" HorizontalAlignment="Left" Content="{Binding Layer4}" ContentTemplateSelector="{StaticResource ViewTemplateSelector}"/>
+				</GroupBox>
+			</StackPanel>
+
+			<StackPanel Grid.Column="2">
+                <GroupBox BorderThickness="0" Header="Layer 5" MinHeight="100px">
+					<ContentPresenter Name="Layer5" HorizontalAlignment="Left" Content="{Binding Layer5}" ContentTemplateSelector="{StaticResource ViewTemplateSelector}"/>
+				</GroupBox>
+
+                <GroupBox BorderThickness="0" Header="Layer 6" MinHeight="100px">
+					<ContentPresenter Name="Layer6" HorizontalAlignment="Left" Content="{Binding Layer6}" ContentTemplateSelector="{StaticResource ViewTemplateSelector}"/>
+				</GroupBox>
+
+                <GroupBox BorderThickness="0" Header="Layer 7" MinHeight="100px">
+					<ContentPresenter Name="Layer7" HorizontalAlignment="Left" Content="{Binding Layer7}" ContentTemplateSelector="{StaticResource ViewTemplateSelector}"/>
+				</GroupBox>
+
+				<Button Content="Send" Margin="15 10 0 0" HorizontalAlignment="Left" Width="100px" Command="{Binding SendCommand}"/>
+			</StackPanel>
+		</Grid>
+
+	</StackPanel>
+</Window>

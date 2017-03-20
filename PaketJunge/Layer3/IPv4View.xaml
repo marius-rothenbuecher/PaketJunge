@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="PaketJunge.View.IPv4View"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Height="260" MinWidth="500" Width="Auto" Padding="10px" FontWeight="Normal">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="30px"></RowDefinition>
+			<RowDefinition Height="30px"></RowDefinition>
+			<RowDefinition Height="30px"></RowDefinition>
+			<RowDefinition Height="30px"></RowDefinition>
+			<RowDefinition Height="30px"></RowDefinition>
+			<RowDefinition Height="30px"></RowDefinition>
+			<RowDefinition Height="30px"></RowDefinition>
+			<RowDefinition Height="30px"></RowDefinition>
+			<RowDefinition Height="30px"></RowDefinition>
+		</Grid.RowDefinitions>
+
+		<TextBlock Grid.Row="0" Grid.Column="0" Text="Source IP"/>
+		<TextBlock Grid.Row="1" Grid.Column="0" Text="Destination IP"/>
+		<TextBlock Grid.Row="2" Grid.Column="0" Text="DiffServ"/>
+		<TextBlock Grid.Row="3" Grid.Column="0" Text="Don't fragment"/>
+		<TextBlock Grid.Row="4" Grid.Column="0" Text="More fragments"/>
+		<TextBlock Grid.Row="5" Grid.Column="0" Text="Fragment offset" />
+		<TextBlock Grid.Row="6" Grid.Column="0" Text="Time to live" />
+		<TextBlock Grid.Row="7" Grid.Column="0" Text="Protocol (upper)" />
+		<TextBox Grid.Row="0" Grid.Column="1" Height="25px" Text="{Binding SourceIP}" Margin="0,3"/>
+		<TextBox Grid.Row="1" Grid.Column="1" Height="25px" Text="{Binding DestinationIP}" Margin="0,3"/>
+		<TextBox Grid.Row="2" Grid.Column="1" Height="25px" Text="{Binding DiffServ}" Margin="0,3"/>
+		<CheckBox Grid.Row="3" Grid.Column="1" Height="25px" IsChecked="{Binding DontFragment}" Margin="0,3"/>
+		<CheckBox Grid.Row="4" Grid.Column="1" Height="25px" IsChecked="{Binding MoreFragments}" Margin="0,3"/>
+		<TextBox Grid.Row="5" Grid.Column="1" Height="25px" Text="{Binding FragmentOffset}" Margin="0,3"/>
+		<TextBox Grid.Row="6" Grid.Column="1" Height="25px" Text="{Binding TimeToLive}" Margin="0,3"/>
+		<ComboBox Grid.Row="7" Grid.Column="1" Height="25px" ItemsSource="{Binding Protocols}" SelectedValue="{Binding SelectedProtocol}" SelectedIndex="0"/>
+	</Grid>
+</UserControl>

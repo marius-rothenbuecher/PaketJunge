@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.9
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaketJunge.View", "PaketJunge\PaketJunge.View.csproj", "{6BDC9BBF-7719-4B50-B98A-1BC51A8B350E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaketJunge.ViewModel", "PaketJunge.ViewModel\PaketJunge.ViewModel.csproj", "{2DEB2CC9-2108-4A75-8213-3BBE68B04712}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaketJunge.Model", "PaketJunge.Model\PaketJunge.Model.csproj", "{0EF278CB-C8E1-4A21-BC1C-4D6E0B8339D7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6BDC9BBF-7719-4B50-B98A-1BC51A8B350E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BDC9BBF-7719-4B50-B98A-1BC51A8B350E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BDC9BBF-7719-4B50-B98A-1BC51A8B350E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BDC9BBF-7719-4B50-B98A-1BC51A8B350E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DEB2CC9-2108-4A75-8213-3BBE68B04712}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DEB2CC9-2108-4A75-8213-3BBE68B04712}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DEB2CC9-2108-4A75-8213-3BBE68B04712}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DEB2CC9-2108-4A75-8213-3BBE68B04712}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EF278CB-C8E1-4A21-BC1C-4D6E0B8339D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EF278CB-C8E1-4A21-BC1C-4D6E0B8339D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EF278CB-C8E1-4A21-BC1C-4D6E0B8339D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EF278CB-C8E1-4A21-BC1C-4D6E0B8339D7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
