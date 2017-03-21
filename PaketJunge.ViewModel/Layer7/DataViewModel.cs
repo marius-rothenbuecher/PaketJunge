@@ -12,11 +12,13 @@ namespace PaketJunge.ViewModel
         public string Data { get { return this.data; } set { SetField<string>(ref this.data, value, "Data"); } }
         private string data;
 
+        public DataViewModel()
+        {
+            this.data = string.Empty;
+        }
+
         public override ILayer GetData()
         {
-            if (this.Data == null)
-                this.Data = string.Empty;
-
             if (this.IsByteStream)
                 return new PayloadLayer() { Data = new Datagram(this.StringToByteArray(this.Data)) };
 
