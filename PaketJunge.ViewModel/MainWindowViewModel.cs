@@ -59,11 +59,11 @@ namespace PaketJunge.ViewModel
             {
                 PacketBuilder packetBuilder;
 
-                if (this.Layer2 == null)
+                if (this.Layer2.GetType() == typeof(EmptyLayer2ViewModel))
                     packetBuilder = new PacketBuilder(this.Layer7.GetData());
-                else if (this.Layer3 == null)
+                else if (this.Layer3.GetType() == typeof(EmptyLayer3ViewModel))
                     packetBuilder = new PacketBuilder(this.Layer2.GetFrame(), this.Layer7.GetData());
-                else if (this.Layer4 == null)
+                else if (this.Layer4.GetType() == typeof(EmptyLayer4ViewModel))
                     packetBuilder = new PacketBuilder(this.Layer2.GetFrame(), this.Layer3.GetPacket(), this.Layer7.GetData());
                 else
                     packetBuilder = new PacketBuilder(this.Layer2.GetFrame(), this.Layer3.GetPacket(), this.Layer4.GetSegment(), this.Layer7.GetData());

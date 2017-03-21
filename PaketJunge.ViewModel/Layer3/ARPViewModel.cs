@@ -42,6 +42,8 @@ namespace PaketJunge.ViewModel
 			this.operations = ARPModel.GetOperations();
 			this.sourceMAC = "00:00:00:00:00:00";
 			this.destinationMAC = "00:00:00:00:00:00";
+            this.sourceIP = "127.0.0.1";
+            this.destinationIP = "127.0.0.1";
             this.selectedOperation = ArpOperation.None.ToString();
             this.selectedType = ArpHardwareType.None.ToString();
 		}
