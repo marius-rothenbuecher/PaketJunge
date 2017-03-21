@@ -11,25 +11,25 @@ namespace PaketJunge.ViewModel
 {
     public class MainWindowViewModel : NotifyProperty
     {
-        public Layer1ViewModel Layer1 { get { return this.layer1; } set { SetField<Layer1ViewModel>(ref this.layer1, value, "Layer1"); } }
+        public Layer1ViewModel Layer1 { get => this.layer1; set { SetField(ref this.layer1, value, "Layer1"); } }
         private Layer1ViewModel layer1;
 
-        public Layer2ViewModel Layer2 { get { return this.layer2; } set { SetField<Layer2ViewModel>(ref this.layer2, value, "Layer2"); } }
+        public Layer2ViewModel Layer2 { get => this.layer2; set { SetField(ref this.layer2, value, "Layer2"); } }
         private Layer2ViewModel layer2;
 
-        public Layer3ViewModel Layer3 { get { return this.layer3; } set { SetField<Layer3ViewModel>(ref this.layer3, value, "Layer3"); } }
+        public Layer3ViewModel Layer3 { get => this.layer3; set { SetField(ref this.layer3, value, "Layer3"); } }
         private Layer3ViewModel layer3;
 
-        public Layer4ViewModel Layer4 { get { return this.layer4; } set { SetField<Layer4ViewModel>(ref this.layer4, value, "Layer4"); } }
+        public Layer4ViewModel Layer4 { get => this.layer4; set { SetField(ref this.layer4, value, "Layer4"); } }
         private Layer4ViewModel layer4;
 
-        public Layer5ViewModel Layer5 { get { return this.layer5; } set { SetField<Layer5ViewModel>(ref this.layer5, value, "Layer5"); } }
+        public Layer5ViewModel Layer5 { get { return this.layer5; } set { SetField(ref this.layer5, value, "Layer5"); } }
         private Layer5ViewModel layer5;
 
-        public Layer6ViewModel Layer6 { get { return this.layer6; } set { SetField<Layer6ViewModel>(ref this.layer6, value, "Layer6"); } }
+        public Layer6ViewModel Layer6 { get { return this.layer6; } set { SetField(ref this.layer6, value, "Layer6"); } }
         private Layer6ViewModel layer6;
 
-        public Layer7ViewModel Layer7 { get { return this.layer7; } set { SetField<Layer7ViewModel>(ref this.layer7, value, "Layer7"); } }
+        public Layer7ViewModel Layer7 { get { return this.layer7; } set { SetField(ref this.layer7, value, "Layer7"); } }
         private Layer7ViewModel layer7;
 
         public ICaptureDevice Device { get; set; }
@@ -133,7 +133,7 @@ namespace PaketJunge.ViewModel
 
         private void EthernetViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "SelectedType")
+            if (e.PropertyName == nameof(EthernetViewModel.SelectedType))
             {
                 string type = ((EthernetViewModel)sender).SelectedType;
 
@@ -168,7 +168,7 @@ namespace PaketJunge.ViewModel
 
         private void IPv4ViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "SelectedProtocol")
+            if (e.PropertyName == nameof(IPv4ViewModel.SelectedProtocol))
             {
                 string protocol = ((IPv4ViewModel)sender).SelectedProtocol;
 
@@ -181,11 +181,15 @@ namespace PaketJunge.ViewModel
                 else
                     this.Layer4 = null;
             }
+            else if (e.PropertyName == nameof(IPv4ViewModel.DestinationIP))
+            {
+
+            }
         }
 
         private void IPv6ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "SelectedProtocol")
+            if (e.PropertyName == nameof(IPv4ViewModel.SelectedProtocol))
             {
                 string protocol = ((IPv6ViewModel)sender).SelectedProtocol;
 
