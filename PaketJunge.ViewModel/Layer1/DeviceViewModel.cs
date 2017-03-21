@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using PaketJunge.Model;
 
 namespace PaketJunge.ViewModel
@@ -22,6 +23,8 @@ namespace PaketJunge.ViewModel
 		{
 			this.devices = DeviceModel.GetDevices();
 			this.standards = DeviceModel.GetStandards();
+            this.selectedDevice = 0;
+            this.selectedStandard = this.Standards.FirstOrDefault();
 		}
 
 		public override ushort GetDevice()

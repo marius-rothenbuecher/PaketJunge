@@ -22,8 +22,7 @@ namespace PaketJunge.ViewModel
 
 		public EthernetViewModel()
 		{
-			this.sourceMAC = "00:01:02:03:04:05";
-			this.destinationMAC = "00:01:02:03:04:05";
+			this.destinationMAC = "00:11:22:33:44:55";
 			this.types = EthernetModel.GetPacketTypes();
 		}
 

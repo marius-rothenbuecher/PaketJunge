@@ -32,6 +32,8 @@ namespace PaketJunge.ViewModel
         public Layer7ViewModel Layer7 { get { return this.layer7; } set { SetField<Layer7ViewModel>(ref this.layer7, value, "Layer7"); } }
         private Layer7ViewModel layer7;
 
+        public ICaptureDevice Device { get; set; }
+
         public RelayCommand<object> SendCommand { get; set; }
 
         public MainWindowViewModel()
@@ -52,8 +54,6 @@ namespace PaketJunge.ViewModel
         // TODO: implement function for saving templates
         public void Send(object sender)
         {
-            ICaptureDevice device = null;
-
             try
             {
                 PacketBuilder packetBuilder;
@@ -69,10 +69,9 @@ namespace PaketJunge.ViewModel
 
                 var packet = packetBuilder.Build(DateTime.UtcNow);
 
-                device = CaptureDeviceList.Instance[this.Layer1.GetDevice()];
-                device.Open(DeviceMode.Normal);
+                this.Device = this.OpenDevice();
 
-                device.SendPacket(packet.Buffer);
+                this.Device.SendPacket(packet.Buffer);
             }
             catch (Exception e)
             {
@@ -80,31 +79,55 @@ namespace PaketJunge.ViewModel
             }
             finally
             {
-                device?.Close();
+                this.Device?.Close();
             }
+        }
+
+        private ICaptureDevice OpenDevice()
+        {
+            var device = CaptureDeviceList.Instance[this.Layer1.GetDevice()];
+            device.Open();
+
+            return device;
+        }
+
+        private string GetMacAsString(string macAsByteStream)
+        {
+            if (macAsByteStream.Length != 12)
+                return "00:11:22:33:44:55";
+
+            string macAsString = string.Empty;
+
+            for (int i = 0; i < 5; i++)
+                macAsString += macAsByteStream.Substring(i * 2, 2) + ":";
+
+            macAsString += macAsByteStream.Substring(10, 2);
+
+            return macAsString;
         }
 
         private void DeviceViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "SelectedStandard")
+            string standard = ((DeviceViewModel)sender).SelectedStandard;
+
+            if (standard == StandardType.Ethernet2.ToString())
             {
-                string standard = ((DeviceViewModel)sender).SelectedStandard;
+                this.Layer2 = new EthernetViewModel();
 
-                if (standard == StandardType.Ethernet2.ToString())
-                {
-                    this.Layer2 = new EthernetViewModel();
+                string macAsByteStream = this.OpenDevice()?.MacAddress?.ToString();
+                string mac = this.GetMacAsString(macAsByteStream);
 
-                    EthernetViewModel ethernetViewModel = (EthernetViewModel)this.layer2;
-                    ethernetViewModel.PropertyChanged += EthernetViewModelPropertyChanged;
-                }
-                else
-                {
-                    this.Layer2 = null;
-                    this.Layer3 = null;
-                    this.Layer4 = null;
-                    this.Layer5 = null;
-                    this.Layer6 = null;
-                }
+                EthernetViewModel ethernetViewModel = (EthernetViewModel)this.layer2;
+                ethernetViewModel.SourceMAC = mac;
+                ethernetViewModel.PropertyChanged += EthernetViewModelPropertyChanged;
+            }
+            else
+            {
+                this.Layer2 = null;
+                this.Layer3 = null;
+                this.Layer4 = null;
+                this.Layer5 = null;
+                this.Layer6 = null;
             }
         }
 
