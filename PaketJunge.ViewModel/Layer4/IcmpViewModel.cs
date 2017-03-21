@@ -22,6 +22,7 @@ namespace PaketJunge.ViewModel
         {
             this.typesAndCodes = ICMPModel.GetTypesAndCodes();
             this.data = "DEADBEEF";
+            this.selectedTypeAndCode = IcmpMessageTypeAndCode.Echo.ToString();
         }
 
         public override ILayer GetSegment()

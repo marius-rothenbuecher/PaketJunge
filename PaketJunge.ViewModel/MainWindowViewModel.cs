@@ -6,6 +6,7 @@ using PcapDotNet.Packets;
 using PcapDotNet.Packets.Ethernet;
 using PcapDotNet.Packets.IpV4;
 using SharpPcap;
+using System.Linq;
 
 namespace PaketJunge.ViewModel
 {
@@ -38,16 +39,16 @@ namespace PaketJunge.ViewModel
 
         public MainWindowViewModel()
         {
-            this.layer1 = new DeviceViewModel();
-            this.layer2 = new EmptyLayer2ViewModel();
-            this.layer3 = new EmptyLayer3ViewModel();
-            this.layer4 = new EmptyLayer4ViewModel();
-            this.layer5 = new EmptyLayer5ViewModel();
-            this.layer6 = new EmptyLayer6ViewModel();
-            this.layer7 = new DataViewModel();
+            this.Layer1 = new DeviceViewModel();
+            this.Layer2 = new EmptyLayer2ViewModel();
+            this.Layer3 = new EmptyLayer3ViewModel();
+            this.Layer4 = new EmptyLayer4ViewModel();
+            this.Layer5 = new EmptyLayer5ViewModel();
+            this.Layer6 = new EmptyLayer6ViewModel();
+            this.Layer7 = new DataViewModel();
             this.SendCommand = new RelayCommand<object>(Send);
 
-            var deviceViewModel = (DeviceViewModel)this.layer1;
+            var deviceViewModel = (DeviceViewModel)this.Layer1;
             deviceViewModel.PropertyChanged += this.DeviceViewModelPropertyChanged;
         }
 
@@ -112,22 +113,23 @@ namespace PaketJunge.ViewModel
 
             if (standard == StandardType.Ethernet2.ToString())
             {
-                this.Layer2 = new EthernetViewModel();
+                if (this.Layer2.GetType() == typeof(EmptyLayer2ViewModel) || e.PropertyName == nameof(EthernetViewModel.SelectedType))
+                    this.Layer2 = new EthernetViewModel();
 
                 string macAsByteStream = this.OpenDevice()?.MacAddress?.ToString();
                 string mac = this.GetMacAsString(macAsByteStream);
 
-                EthernetViewModel ethernetViewModel = (EthernetViewModel)this.layer2;
+                EthernetViewModel ethernetViewModel = (EthernetViewModel)this.Layer2;
                 ethernetViewModel.SourceMAC = mac;
                 ethernetViewModel.PropertyChanged += EthernetViewModelPropertyChanged;
             }
             else
             {
-                this.Layer2 = null;
-                this.Layer3 = null;
-                this.Layer4 = null;
-                this.Layer5 = null;
-                this.Layer6 = null;
+                this.Layer2 = new EmptyLayer2ViewModel();
+                this.Layer3 = new EmptyLayer3ViewModel();
+                this.Layer4 = new EmptyLayer4ViewModel();
+                this.Layer5 = new EmptyLayer5ViewModel();
+                this.Layer6 = new EmptyLayer6ViewModel();
             }
         }
 
@@ -140,28 +142,28 @@ namespace PaketJunge.ViewModel
                 if (type == EthernetType.IpV4.ToString())
                 {
                     this.Layer3 = new IPv4ViewModel();
-                    this.Layer4 = null;
-
-                    IPv4ViewModel ipv4ViewModel = (IPv4ViewModel)this.layer3;
+                    this.Layer4 = new EmptyLayer4ViewModel();
+                    
+                    var ipv4ViewModel = (IPv4ViewModel)this.Layer3;
                     ipv4ViewModel.PropertyChanged += IPv4ViewModelPropertyChanged;
                 }
                 else if (type == EthernetType.IpV6.ToString())
                 {
-                    this.layer3 = new IPv6ViewModel();
-                    this.Layer4 = null;
+                    this.Layer3 = new IPv6ViewModel();
+                    this.Layer4 = new EmptyLayer4ViewModel();
 
-                    IPv6ViewModel ipv6ViewModel = (IPv6ViewModel)this.layer3;
+                    var ipv6ViewModel = (IPv6ViewModel)this.Layer3;
                     ipv6ViewModel.PropertyChanged += IPv6ViewModel_PropertyChanged;
                 }
                 else if (type == EthernetType.Arp.ToString())
                 {
                     this.Layer3 = new ARPViewModel();
-                    this.Layer4 = null;
+                    this.Layer4 = new EmptyLayer4ViewModel();
                 }
                 else
                 {
-                    this.Layer3 = null;
-                    this.Layer4 = null;
+                    this.Layer3 = new EmptyLayer3ViewModel();
+                    this.Layer4 = new EmptyLayer4ViewModel();
                 }
             }
         }
@@ -179,7 +181,7 @@ namespace PaketJunge.ViewModel
                 else if (protocol == IpV4Protocol.InternetControlMessageProtocol.ToString())
                     this.Layer4 = new ICMPViewModel();
                 else
-                    this.Layer4 = null;
+                    this.Layer4 = new EmptyLayer4ViewModel();
             }
             else if (e.PropertyName == nameof(IPv4ViewModel.DestinationIP))
             {
@@ -198,7 +200,7 @@ namespace PaketJunge.ViewModel
                 else if (protocol == IpV4Protocol.Udp.ToString())
                     this.Layer4 = new UDPViewModel();
                 else
-                    this.Layer4 = null;
+                    this.Layer4 = new EmptyLayer4ViewModel();
             }
         }
     }
