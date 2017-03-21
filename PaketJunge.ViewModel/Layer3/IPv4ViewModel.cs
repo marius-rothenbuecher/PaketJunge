@@ -37,6 +37,7 @@ namespace PaketJunge.ViewModel
 			this.sourceIP = "127.0.0.1";
 			this.destinationIP = "127.0.0.1";
 			this.protocols = IPv4Model.GetProtocols();
+            this.timeToLive = 128;
 		}
 
 		//TODO: fragment flags?
@@ -46,7 +47,7 @@ namespace PaketJunge.ViewModel
 			{
 				Source = new IpV4Address(this.SourceIP),
 				CurrentDestination = new IpV4Address(this.DestinationIP),
-				TypeOfService = (byte)DiffServ,
+				TypeOfService = (byte)this.DiffServ,
 				Identification = this.Id,
 				Ttl = (byte)this.TimeToLive,
 				Protocol = (IpV4Protocol)Enum.Parse(typeof(IpV4Protocol), this.SelectedProtocol)

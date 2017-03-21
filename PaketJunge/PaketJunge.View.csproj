@@ -85,6 +85,9 @@
     <Compile Include="Layer4\EmptyLayer4View.xaml.cs">
       <DependentUpon>EmptyLayer4View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Layer4\ICMPView.xaml.cs">
+      <DependentUpon>ICMPView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Layer5\EmptyLayer5View.xaml.cs">
       <DependentUpon>EmptyLayer5View.xaml</DependentUpon>
     </Compile>
@@ -131,6 +134,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Layer4\EmptyLayer4View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Layer4\ICMPView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

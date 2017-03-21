@@ -31,8 +31,8 @@ namespace PaketJunge.ViewModel
 		{
 			return new EthernetLayer()
 			{
-				Source = new MacAddress(this.SourceMAC),
-				Destination = new MacAddress(this.DestinationMAC),
+				Source = new MacAddress(this.SourceMAC.Replace("-", ":")),
+				Destination = new MacAddress(this.DestinationMAC.Replace("-", ":")),
 				EtherType = (EthernetType)Enum.Parse(typeof(EthernetType), this.SelectedType)
 			};
 		}

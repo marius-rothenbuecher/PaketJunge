@@ -43,12 +43,13 @@ namespace PaketJunge.ViewModel
             this.layer5 = new EmptyLayer5ViewModel();
             this.layer6 = new EmptyLayer6ViewModel();
             this.layer7 = new DataViewModel();
-            SendCommand = new RelayCommand<object>(Send);
+            this.SendCommand = new RelayCommand<object>(Send);
 
-            DeviceViewModel deviceViewModel = (DeviceViewModel)this.layer1;
-            deviceViewModel.PropertyChanged += deviceViewModel_PropertyChanged;
+            var deviceViewModel = (DeviceViewModel)this.layer1;
+            deviceViewModel.PropertyChanged += this.DeviceViewModelPropertyChanged;
         }
 
+        // TODO: implement function for saving templates
         public void Send(object sender)
         {
             ICaptureDevice device = null;
@@ -65,7 +66,7 @@ namespace PaketJunge.ViewModel
                     packetBuilder = new PacketBuilder(this.Layer2.GetFrame(), this.Layer3.GetPacket(), this.Layer7.GetData());
                 else
                     packetBuilder = new PacketBuilder(this.Layer2.GetFrame(), this.Layer3.GetPacket(), this.Layer4.GetSegment(), this.Layer7.GetData());
-                
+
                 var packet = packetBuilder.Build(DateTime.UtcNow);
 
                 device = CaptureDeviceList.Instance[this.Layer1.GetDevice()];
@@ -83,7 +84,7 @@ namespace PaketJunge.ViewModel
             }
         }
 
-        private void deviceViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void DeviceViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "SelectedStandard")
             {
@@ -94,7 +95,7 @@ namespace PaketJunge.ViewModel
                     this.Layer2 = new EthernetViewModel();
 
                     EthernetViewModel ethernetViewModel = (EthernetViewModel)this.layer2;
-                    ethernetViewModel.PropertyChanged += ethernetViewModel_PropertyChanged;
+                    ethernetViewModel.PropertyChanged += EthernetViewModelPropertyChanged;
                 }
                 else
                 {
@@ -107,7 +108,7 @@ namespace PaketJunge.ViewModel
             }
         }
 
-        private void ethernetViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void EthernetViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "SelectedType")
             {
@@ -119,7 +120,7 @@ namespace PaketJunge.ViewModel
                     this.Layer4 = null;
 
                     IPv4ViewModel ipv4ViewModel = (IPv4ViewModel)this.layer3;
-                    ipv4ViewModel.PropertyChanged += ipv4ViewModel_PropertyChanged;
+                    ipv4ViewModel.PropertyChanged += IPv4ViewModelPropertyChanged;
                 }
                 else if (type == EthernetType.IpV6.ToString())
                 {
@@ -127,7 +128,7 @@ namespace PaketJunge.ViewModel
                     this.Layer4 = null;
 
                     IPv6ViewModel ipv6ViewModel = (IPv6ViewModel)this.layer3;
-                    ipv6ViewModel.PropertyChanged += ipv6ViewModel_PropertyChanged;
+                    ipv6ViewModel.PropertyChanged += IPv6ViewModel_PropertyChanged;
                 }
                 else if (type == EthernetType.Arp.ToString())
                 {
@@ -142,7 +143,7 @@ namespace PaketJunge.ViewModel
             }
         }
 
-        private void ipv4ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void IPv4ViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "SelectedProtocol")
             {
@@ -152,12 +153,14 @@ namespace PaketJunge.ViewModel
                     this.Layer4 = new TCPViewModel();
                 else if (protocol == IpV4Protocol.Udp.ToString())
                     this.Layer4 = new UDPViewModel();
+                else if (protocol == IpV4Protocol.InternetControlMessageProtocol.ToString())
+                    this.Layer4 = new ICMPViewModel();
                 else
                     this.Layer4 = null;
             }
         }
 
-        private void ipv6ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void IPv6ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "SelectedProtocol")
             {

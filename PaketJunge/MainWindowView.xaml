@@ -19,7 +19,7 @@
             <TextBlock FontSize="20px" Text="Paket, Junge!"/>
         </StackPanel>
         
-        <TextBlock FontWeight="Medium" Margin="30 0 0 30" Text="Build your paket and click send."/>
+        <TextBlock FontWeight="Medium" Margin="30 0 0 30" Text="Build your packet and click send."/>
 
         <Grid Margin="30 0 30 30">
 			<Grid.ColumnDefinitions>

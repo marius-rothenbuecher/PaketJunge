@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="PaketJunge.View.ICMPView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Height="100" MinWidth="500" Width="Auto" Padding="10px" FontWeight="Normal">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+
+		<Grid.RowDefinitions>
+            <RowDefinition Height="30px"></RowDefinition>
+            <RowDefinition Height="30px"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Data (byte stream)"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Type and code" />
+        <TextBox Grid.Row="0" Grid.Column="1" Height="25px" Text="{Binding Data}" Margin="0,3"/>
+        <ComboBox Grid.Row="1" Grid.Column="1" Height="25px" ItemsSource="{Binding TypesAndCodes}" SelectedValue="{Binding SelectedTypeAndCode}" SelectedIndex="0"/>
+	</Grid>
+</UserControl>

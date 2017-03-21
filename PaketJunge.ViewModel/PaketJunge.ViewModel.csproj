@@ -63,6 +63,7 @@
     <Compile Include="Layer2\EmptyLayer2ViewModel.cs" />
     <Compile Include="Layer3\EmptyLayer3ViewModel.cs" />
     <Compile Include="Layer4\EmptyLayer4ViewModel.cs" />
+    <Compile Include="Layer4\IcmpViewModel.cs" />
     <Compile Include="Layer5\EmptyLayer5ViewModel.cs" />
     <Compile Include="Layer6\EmptyLayer6ViewModel.cs" />
     <Compile Include="Layer7\DataViewModel.cs" />
