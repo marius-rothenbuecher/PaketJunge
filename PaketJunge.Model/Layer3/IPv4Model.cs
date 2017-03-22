@@ -8,11 +8,11 @@ namespace PaketJunge.Model
 	{
 		public static List<string> GetProtocols()
 		{
-			Array values = Enum.GetValues(typeof(IpV4Protocol));
+			var protocols = Enum.GetValues(typeof(IpV4Protocol));
 			var protocolList = new List<string>();
 
-			foreach (IpV4Protocol type in values)
-				protocolList.Add(type.ToString());
+			foreach (var protcol in protocols)
+				protocolList.Add(protcol.ToString());
 
 			protocolList.Sort();
 

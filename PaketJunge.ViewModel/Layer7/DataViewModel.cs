@@ -5,6 +5,7 @@ using PcapDotNet.Packets;
 
 namespace PaketJunge.ViewModel
 {
+    // TODO: implement function for saving templates
     public class DataViewModel : Layer7ViewModel
     {
         public bool IsByteStream { get; set; }

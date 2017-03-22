@@ -8,15 +8,15 @@ namespace PaketJunge.Model.Layer4
     {
         public static List<string> GetTypesAndCodes()
         {
-            Array values = Enum.GetValues(typeof(IcmpMessageTypeAndCode));
-            var protocolList = new List<string>();
+            var typesAndCodes = Enum.GetValues(typeof(IcmpMessageTypeAndCode));
+            var typAndCodesList = new List<string>();
 
-            foreach (var typeAndCode in values)
-                protocolList.Add(typeAndCode.ToString());
+            foreach (var typeAndCode in typesAndCodes)
+                typAndCodesList.Add(typeAndCode.ToString());
 
-            protocolList.Sort();
+            typAndCodesList.Sort();
 
-            return protocolList;
+            return typAndCodesList;
         }
     }
 }

@@ -52,7 +52,6 @@ namespace PaketJunge.ViewModel
             deviceViewModel.PropertyChanged += this.DeviceViewModelPropertyChanged;
         }
 
-        // TODO: implement function for saving templates
         public void Send(object sender)
         {
             try

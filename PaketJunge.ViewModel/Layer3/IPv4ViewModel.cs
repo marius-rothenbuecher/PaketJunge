@@ -17,16 +17,22 @@ namespace PaketJunge.ViewModel
 		public ushort DiffServ { get { return this.diffServ; } set { SetField<ushort>(ref this.diffServ, value, nameof(this.DiffServ)); } }
 		private ushort diffServ;
 
-		public int FragmentOffset { get { return this.fragmentOffset; } set { SetField<int>(ref this.fragmentOffset, value, nameof(this.FragmentOffset)); } }
-		private int fragmentOffset;
+		public ushort FragmentOffset { get { return this.fragmentOffset; } set { SetField<ushort>(ref this.fragmentOffset, value, nameof(this.FragmentOffset)); } }
+		private ushort fragmentOffset;
 
 		public ushort Id { get { return this.id; } set { SetField<ushort>(ref this.id, value, nameof(this.Id)); } }
 		private ushort id;
 
-		public ushort TimeToLive { get { return this.timeToLive; } set { SetField<ushort>(ref this.timeToLive, value, "$1"); } }
+		public ushort TimeToLive { get { return this.timeToLive; } set { SetField<ushort>(ref this.timeToLive, value, nameof(this.TimeToLive)); } }
 		private ushort timeToLive;
 
-		public List<string> Protocols { get { return this.protocols; } set { SetField<List<string>>(ref this.protocols, value, nameof(this.Protocols)); } }
+        public bool DontFragment { get { return this.dontFragment; } set { SetField<bool>(ref this.dontFragment, value, nameof(this.DontFragment)); } }
+        private bool dontFragment;
+
+        public bool MoreFragments { get { return this.moreFragments; } set { SetField<bool>(ref this.moreFragments, value, nameof(this.MoreFragments)); } }
+        private bool moreFragments;
+
+        public List<string> Protocols { get { return this.protocols; } set { SetField<List<string>>(ref this.protocols, value, nameof(this.Protocols)); } }
 		private List<string> protocols;
 
 		public string SelectedProtocol { get { return this.selectedProtocol; } set { SetField<string>(ref this.selectedProtocol, value, nameof(this.SelectedProtocol)); } }
@@ -40,18 +46,26 @@ namespace PaketJunge.ViewModel
             this.selectedProtocol = nameof(IpV4Protocol.Ip);
             this.timeToLive = 128;
 		}
-
-		//TODO: fragment flags?
+        
 		public override ILayer GetPacket()
 		{
-			var ipv4Layer = new IpV4Layer()
-			{
-				Source = new IpV4Address(this.SourceIP),
-				CurrentDestination = new IpV4Address(this.DestinationIP),
-				TypeOfService = (byte)this.DiffServ,
-				Identification = this.Id,
-				Ttl = (byte)this.TimeToLive,
-				Protocol = (IpV4Protocol)Enum.Parse(typeof(IpV4Protocol), this.SelectedProtocol)
+            var fragmentationOptions = IpV4FragmentationOptions.None;
+
+            if (this.DontFragment)
+                fragmentationOptions |= IpV4FragmentationOptions.DoNotFragment;
+
+            if (this.MoreFragments)
+                fragmentationOptions |= IpV4FragmentationOptions.MoreFragments;
+
+            var ipv4Layer = new IpV4Layer()
+            {
+                Source = new IpV4Address(this.SourceIP),
+                CurrentDestination = new IpV4Address(this.DestinationIP),
+                TypeOfService = (byte)this.DiffServ,
+                Identification = this.Id,
+                Ttl = (byte)this.TimeToLive,
+                Protocol = (IpV4Protocol)Enum.Parse(typeof(IpV4Protocol), this.SelectedProtocol),
+                Fragmentation = new IpV4Fragmentation(fragmentationOptions, this.FragmentOffset)
 			};
 
 			return ipv4Layer;

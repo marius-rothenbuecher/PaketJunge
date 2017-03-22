@@ -8,11 +8,11 @@ namespace PaketJunge.Model
 	{
 		public static List<string> GetOperations()
 		{
-			Array valuesEthernet = Enum.GetValues(typeof(ArpOperation));
+			var operations = Enum.GetValues(typeof(ArpOperation));
 			var operationList = new List<string>();
 
-			foreach (ArpOperation type in valuesEthernet)
-				operationList.Add(type.ToString());
+			foreach (var operation in operations)
+				operationList.Add(operation.ToString());
 
 			operationList.Sort();
 

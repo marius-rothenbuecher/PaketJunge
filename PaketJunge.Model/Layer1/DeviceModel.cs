@@ -24,13 +24,13 @@ namespace PaketJunge.Model
 
 		public static List<string> GetStandards()
 		{
-			Array values = Enum.GetValues(typeof(StandardType));
-			var standardList = new List<string>();
+			var types = Enum.GetValues(typeof(StandardType));
+			var typeList = new List<string>();
 
-			foreach (StandardType type in values)
-				standardList.Add(type.ToString());
+			foreach (var type in types)
+				typeList.Add(type.ToString());
 
-			return standardList;
+			return typeList;
 		}
 	}
 }

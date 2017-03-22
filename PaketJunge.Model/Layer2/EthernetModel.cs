@@ -8,15 +8,15 @@ namespace PaketJunge.Model
     {
 		public static List<string> GetPacketTypes()
 		{
-			Array valuesEthernet = Enum.GetValues(typeof(EthernetType));
-			var packetTypeList = new List<string>();
+			var types = Enum.GetValues(typeof(EthernetType));
+			var typeList = new List<string>();
 
-			foreach (EthernetType type in valuesEthernet)
-				packetTypeList.Add(type.ToString());
+			foreach (var type in types)
+				typeList.Add(type.ToString());
 
-			packetTypeList.Sort();
+			typeList.Sort();
 
-			return packetTypeList;
+			return typeList;
 		}
 	}
 }
