@@ -4,8 +4,8 @@ using PcapDotNet.Packets.Ethernet;
 
 namespace PaketJunge.Model
 {
-	public class EthernetModel
-	{
+    public class EthernetModel
+    {
 		public static List<string> GetPacketTypes()
 		{
 			Array valuesEthernet = Enum.GetValues(typeof(EthernetType));

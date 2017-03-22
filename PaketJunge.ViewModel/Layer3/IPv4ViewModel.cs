@@ -8,28 +8,28 @@ namespace PaketJunge.ViewModel
 {
 	public class IPv4ViewModel : Layer3ViewModel
 	{
-		public string SourceIP { get { return this.sourceIP; } set { SetField<string>(ref this.sourceIP, value, "SourceIP"); } }
+		public string SourceIP { get { return this.sourceIP; } set { SetField<string>(ref this.sourceIP, value, nameof(this.SourceIP)); } }
 		private string sourceIP;
 
-		public string DestinationIP { get { return this.destinationIP; } set { SetField<string>(ref this.destinationIP, value, "DestinationIP"); } }
+		public string DestinationIP { get { return this.destinationIP; } set { SetField<string>(ref this.destinationIP, value, nameof(this.DestinationIP)); } }
 		private string destinationIP;
 
-		public ushort DiffServ { get { return this.diffServ; } set { SetField<ushort>(ref this.diffServ, value, "DiffServ"); } }
+		public ushort DiffServ { get { return this.diffServ; } set { SetField<ushort>(ref this.diffServ, value, nameof(this.DiffServ)); } }
 		private ushort diffServ;
 
-		public int FragmentOffset { get { return this.fragmentOffset; } set { SetField<int>(ref this.fragmentOffset, value, "FragmentOffset"); } }
+		public int FragmentOffset { get { return this.fragmentOffset; } set { SetField<int>(ref this.fragmentOffset, value, nameof(this.FragmentOffset)); } }
 		private int fragmentOffset;
 
-		public ushort Id { get { return this.id; } set { SetField<ushort>(ref this.id, value, "Id"); } }
+		public ushort Id { get { return this.id; } set { SetField<ushort>(ref this.id, value, nameof(this.Id)); } }
 		private ushort id;
 
-		public ushort TimeToLive { get { return this.timeToLive; } set { SetField<ushort>(ref this.timeToLive, value, "TimeToLive"); } }
+		public ushort TimeToLive { get { return this.timeToLive; } set { SetField<ushort>(ref this.timeToLive, value, "$1"); } }
 		private ushort timeToLive;
 
-		public List<string> Protocols { get { return this.protocols; } set { SetField<List<string>>(ref this.protocols, value, "Protocols"); } }
+		public List<string> Protocols { get { return this.protocols; } set { SetField<List<string>>(ref this.protocols, value, nameof(this.Protocols)); } }
 		private List<string> protocols;
 
-		public string SelectedProtocol { get { return this.selectedProtocol; } set { SetField<string>(ref this.selectedProtocol, value, "SelectedProtocol"); } }
+		public string SelectedProtocol { get { return this.selectedProtocol; } set { SetField<string>(ref this.selectedProtocol, value, nameof(this.SelectedProtocol)); } }
 		private string selectedProtocol;
 
 		public IPv4ViewModel()
@@ -37,6 +37,7 @@ namespace PaketJunge.ViewModel
 			this.sourceIP = "127.0.0.1";
 			this.destinationIP = "127.0.0.1";
 			this.protocols = IPv4Model.GetProtocols();
+            this.selectedProtocol = nameof(IpV4Protocol.Ip);
             this.timeToLive = 128;
 		}
 

@@ -9,7 +9,7 @@ namespace PaketJunge.ViewModel
     {
         public bool IsByteStream { get; set; }
 
-        public string Data { get { return this.data; } set { SetField<string>(ref this.data, value, "Data"); } }
+        public string Data { get { return this.data; } set { SetField<string>(ref this.data, value, nameof(this.Data)); } }
         private string data;
 
         public DataViewModel()

@@ -33,18 +33,6 @@
     <Reference Include="PacketDotNet, Version=0.13.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\PacketDotNet.0.13.0\lib\net\PacketDotNet.dll</HintPath>
     </Reference>
-    <Reference Include="PcapDotNet.Base">
-      <HintPath>..\packages\PcapDotNet.0.10.2\lib\net40\PcapDotNet.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="PcapDotNet.Core">
-      <HintPath>..\packages\PcapDotNet.0.10.2\lib\net40\PcapDotNet.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="PcapDotNet.Core.Extensions">
-      <HintPath>..\packages\PcapDotNet.0.10.2\lib\net40\PcapDotNet.Core.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="PcapDotNet.Packets">
-      <HintPath>..\packages\PcapDotNet.0.10.2\lib\net40\PcapDotNet.Packets.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="SharpPcap, Version=4.2.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -91,6 +79,14 @@
     <ProjectReference Include="..\PaketJunge.Model\PaketJunge.Model.csproj">
       <Project>{0ef278cb-c8e1-4a21-bc1c-4d6e0b8339d7}</Project>
       <Name>PaketJunge.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PcapDotNet.Base\PcapDotNet.Base.csproj">
+      <Project>{83e805c9-4d29-4e34-a27e-5a78690fbd2b}</Project>
+      <Name>PcapDotNet.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PcapDotNet.Packets\PcapDotNet.Packets.csproj">
+      <Project>{8a184af5-e46c-482c-81a3-76d8ce290104}</Project>
+      <Name>PcapDotNet.Packets</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

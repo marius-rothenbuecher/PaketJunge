@@ -12,28 +12,28 @@ namespace PaketJunge.ViewModel
 {
     public class ARPViewModel : Layer3ViewModel
     {
-        public string SourceMAC { get { return this.sourceMAC; } set { SetField<string>(ref this.sourceMAC, value, "SourceMAC"); } }
+        public string SourceMAC { get { return this.sourceMAC; } set { SetField<string>(ref this.sourceMAC, value, nameof(this.SourceMAC)); } }
         private string sourceMAC;
 
-        public string DestinationMAC { get { return this.destinationMAC; } set { SetField<string>(ref this.destinationMAC, value, "DestinationMAC"); } }
+        public string DestinationMAC { get { return this.destinationMAC; } set { SetField<string>(ref this.destinationMAC, value, nameof(this.DestinationMAC)); } }
         private string destinationMAC;
 
-        public string SourceIP { get { return this.sourceIP; } set { SetField<string>(ref this.sourceIP, value, "SourceIP"); } }
+        public string SourceIP { get { return this.sourceIP; } set { SetField<string>(ref this.sourceIP, value, nameof(this.SourceIP)); } }
         private string sourceIP;
 
-        public string DestinationIP { get { return this.destinationIP; } set { SetField<string>(ref this.destinationIP, value, "DestinationIP"); } }
+        public string DestinationIP { get { return this.destinationIP; } set { SetField<string>(ref this.destinationIP, value, nameof(this.DestinationIP)); } }
         private string destinationIP;
 
-        public List<string> Types { get { return this.types; } set { SetField<List<string>>(ref this.types, value, "Types"); } }
+        public List<string> Types { get { return this.types; } set { SetField<List<string>>(ref this.types, value, nameof(this.Types)); } }
         private List<string> types;
 
-        public List<string> Operations { get { return this.operations; } set { SetField<List<string>>(ref this.operations, value, "Operations"); } }
+        public List<string> Operations { get { return this.operations; } set { SetField<List<string>>(ref this.operations, value, nameof(this.Operations)); } }
         private List<string> operations;
 
-        public string SelectedType { get { return this.selectedType; } set { SetField<string>(ref this.selectedType, value, "SelectedType"); } }
+        public string SelectedType { get { return this.selectedType; } set { SetField<string>(ref this.selectedType, value, nameof(this.SelectedType)); } }
         private string selectedType;
 
-        public string SelectedOperation { get { return this.selectedOperation; } set { SetField<string>(ref this.selectedOperation, value, "SelectedOperation"); } }
+        public string SelectedOperation { get { return this.selectedOperation; } set { SetField<string>(ref this.selectedOperation, value, nameof(this.SelectedOperation)); } }
         private string selectedOperation;
 
         public ARPViewModel()
@@ -47,8 +47,7 @@ namespace PaketJunge.ViewModel
             this.selectedOperation = ArpOperation.None.ToString();
             this.selectedType = EthernetType.IpV4.ToString();
         }
-
-        //TODO: fail
+        
         public override ILayer GetPacket()
         {
             string sourceMac = this.SourceMAC.Replace("-", string.Empty).Replace(":", string.Empty);

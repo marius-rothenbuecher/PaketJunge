@@ -9,13 +9,13 @@ namespace PaketJunge.ViewModel
 {
     public class ICMPViewModel : Layer4ViewModel
     {
-        public List<string> TypesAndCodes { get { return this.typesAndCodes; } set { SetField<List<string>>(ref this.typesAndCodes, value, "TypesAndCodes"); } }
+        public List<string> TypesAndCodes { get { return this.typesAndCodes; } set { SetField<List<string>>(ref this.typesAndCodes, value, nameof(this.TypesAndCodes)); } }
         private List<string> typesAndCodes;
 
-        public string SelectedTypeAndCode { get { return this.selectedTypeAndCode; } set { SetField<string>(ref this.selectedTypeAndCode, value, "SelectedTypeAndCode"); } }
+        public string SelectedTypeAndCode { get { return this.selectedTypeAndCode; } set { SetField<string>(ref this.selectedTypeAndCode, value, nameof(this.SelectedTypeAndCode)); } }
         private string selectedTypeAndCode;
 
-        public string Data { get { return this.data; } set { SetField<string>(ref this.data, value, "Data"); } }
+        public string Data { get { return this.data; } set { SetField<string>(ref this.data, value, nameof(this.Data)); } }
         private string data;
 
         public ICMPViewModel()
@@ -27,7 +27,7 @@ namespace PaketJunge.ViewModel
 
         public override ILayer GetSegment()
         {
-            // TODO add sequence and identifier
+            // TODO: add sequence and identifier
             var typeAndCode = (IcmpMessageTypeAndCode)Enum.Parse(typeof(IcmpMessageTypeAndCode), this.SelectedTypeAndCode);
             byte layerCode = (byte)typeAndCode;
             byte layerMessageType = (byte)((ushort)typeAndCode >> 8);
