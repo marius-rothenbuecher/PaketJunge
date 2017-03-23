@@ -229,7 +229,10 @@ namespace PaketJunge.ViewModel
                 string protocol = ((UDPViewModel)sender).SelectedProtocol;
 
                 if (protocol == UDPProtocol.DNS.ToString())
+                {
                     this.Layer7 = new DNSViewModel();
+                    ((UDPViewModel)this.Layer4).DestinationPort = 53;
+                }
                 else if (protocol == UDPProtocol.SMB.ToString())
                     return;
                 else
