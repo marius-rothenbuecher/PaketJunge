@@ -54,6 +54,7 @@
     <Compile Include="Layer4\IcmpViewModel.cs" />
     <Compile Include="Layer5\EmptyLayer5ViewModel.cs" />
     <Compile Include="Layer6\EmptyLayer6ViewModel.cs" />
+    <Compile Include="Layer7\DNSViewModel.cs" />
     <Compile Include="Layer7\DataViewModel.cs" />
     <Compile Include="Layer1\DeviceViewModel.cs" />
     <Compile Include="Layer1\Layer1ViewModel.cs" />
@@ -68,7 +69,6 @@
     <Compile Include="Layer4\UDPViewModel.cs" />
     <Compile Include="Layer5\Layer5ViewModel.cs" />
     <Compile Include="Layer6\Layer6ViewModel.cs" />
-    <Compile Include="Layer7\EmptyLayer7ViewModel.cs" />
     <Compile Include="Layer7\Layer7ViewModel.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="NotifyProperty.cs" />

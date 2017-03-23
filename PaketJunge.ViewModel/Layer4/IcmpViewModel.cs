@@ -27,7 +27,7 @@ namespace PaketJunge.ViewModel
 
         public override ILayer GetSegment()
         {
-            // TODO: add sequence and identifier
+            // TODO: add sequence and identifier maybe also for IP
             var typeAndCode = (IcmpMessageTypeAndCode)Enum.Parse(typeof(IcmpMessageTypeAndCode), this.SelectedTypeAndCode);
             byte layerCode = (byte)typeAndCode;
             byte layerMessageType = (byte)((ushort)typeAndCode >> 8);

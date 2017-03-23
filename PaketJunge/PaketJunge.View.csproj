@@ -100,6 +100,9 @@
     <Compile Include="Layer7\EmptyLayer7View.xaml.cs">
       <DependentUpon>EmptyLayer7View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Layer7\DNSView.xaml.cs">
+      <DependentUpon>DNSView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewTemplateSelector.cs" />
     <Page Include="Layer1\DeviceView.xaml">
       <SubType>Designer</SubType>
@@ -180,6 +183,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Layer7\EmptyLayer7View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Layer7\DNSView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

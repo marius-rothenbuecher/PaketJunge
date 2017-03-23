@@ -51,7 +51,10 @@
     <Compile Include="Layer3\ARPModel.cs" />
     <Compile Include="Layer3\IPv6Model.cs" />
     <Compile Include="Layer3\IPv4Model.cs" />
+    <Compile Include="Layer4\UDPProtocol.cs" />
+    <Compile Include="Layer4\UDPModel.cs" />
     <Compile Include="Layer4\IcmpModel.cs" />
+    <Compile Include="Layer7\DNSModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StandardType.cs" />
   </ItemGroup>
@@ -61,7 +64,6 @@
   <ItemGroup>
     <Folder Include="Layer5\" />
     <Folder Include="Layer6\" />
-    <Folder Include="Layer7\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PcapDotNet.Base\PcapDotNet.Base.csproj">

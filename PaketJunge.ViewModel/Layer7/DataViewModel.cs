@@ -5,7 +5,6 @@ using PcapDotNet.Packets;
 
 namespace PaketJunge.ViewModel
 {
-    // TODO: implement function for saving templates
     public class DataViewModel : Layer7ViewModel
     {
         public bool IsByteStream { get; set; }
@@ -18,7 +17,7 @@ namespace PaketJunge.ViewModel
             this.data = string.Empty;
         }
 
-        public override ILayer GetData()
+        public override ILayer GetProtocolDataUnit()
         {
             if (this.IsByteStream)
                 return new PayloadLayer() { Data = new Datagram(this.StringToByteArray(this.Data)) };

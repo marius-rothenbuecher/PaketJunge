@@ -5,6 +5,6 @@ namespace PaketJunge.ViewModel
 {
 	public abstract class Layer7ViewModel : NotifyProperty
 	{
-		public abstract ILayer GetData();
+		public abstract ILayer GetProtocolDataUnit();
 	}
 }

@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="PaketJunge.View.DNSView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Height="450" MinWidth="500" Width="Auto" Padding="10px" FontWeight="Normal">
+	<Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30px"></RowDefinition>
+            <RowDefinition Height="30px"></RowDefinition>
+            <RowDefinition Height="30px"></RowDefinition>
+            <RowDefinition Height="30px"></RowDefinition>
+            <RowDefinition Height="30px"></RowDefinition>
+            <RowDefinition Height="30px"></RowDefinition>
+            <RowDefinition Height="30px"></RowDefinition>
+            <RowDefinition Height="30px"></RowDefinition>
+            <RowDefinition Height="30px"></RowDefinition>
+            <RowDefinition Height="30px"></RowDefinition>
+            <RowDefinition Height="30px"></RowDefinition>
+            <RowDefinition Height="30px"></RowDefinition>
+            <RowDefinition Height="30px"></RowDefinition>
+            <RowDefinition Height="30px"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Future use"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Authentic data"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Authentic answer"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Checking disabled"/>
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Query"/>
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="Recursion available" />
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="Recursion desired" />
+        <TextBlock Grid.Row="7" Grid.Column="0" Text="Response" />
+        <TextBlock Grid.Row="8" Grid.Column="0" Text="Truncated" />
+        <TextBlock Grid.Row="9" Grid.Column="0" Text="Id" />
+        <TextBlock Grid.Row="10" Grid.Column="0" Text="Compression mode" />
+        <TextBlock Grid.Row="11" Grid.Column="0" Text="Op codes" />
+        <TextBlock Grid.Row="12" Grid.Column="0" Text="Response codes" />
+        <CheckBox Grid.Row="0" Grid.Column="1" Height="25px" IsChecked="{Binding FutureUse}" Margin="0,3"/>
+        <CheckBox Grid.Row="1" Grid.Column="1" Height="25px" IsChecked="{Binding IsAuthenticData}" Margin="0,3"/>
+        <CheckBox Grid.Row="2" Grid.Column="1" Height="25px" IsChecked="{Binding IsAuthenticAnswer}" Margin="0,3"/>
+        <CheckBox Grid.Row="3" Grid.Column="1" Height="25px" IsChecked="{Binding IsCheckingDisabled}" Margin="0,3"/>
+        <CheckBox Grid.Row="4" Grid.Column="1" Height="25px" IsChecked="{Binding IsQuery}" Margin="0,3"/>
+        <CheckBox Grid.Row="5" Grid.Column="1" Height="25px" IsChecked="{Binding IsRecursionAvailable}" Margin="0,3"/>
+        <CheckBox Grid.Row="6" Grid.Column="1" Height="25px" IsChecked="{Binding IsRecursionDesired}" Margin="0,3"/>
+        <CheckBox Grid.Row="7" Grid.Column="1" Height="25px" IsChecked="{Binding IsResponse}" Margin="0,3"/>
+        <CheckBox Grid.Row="8" Grid.Column="1" Height="25px" IsChecked="{Binding IsTruncated}" Margin="0,3"/>
+        <TextBox Grid.Row="9" Grid.Column="1" Height="25px" Text="{Binding Id}" Margin="0,3"/>
+        <ComboBox Grid.Row="10" Grid.Column="1" Height="25px" ItemsSource="{Binding CompressionModes}" SelectedValue="{Binding SelectedCompressionMode}" SelectedIndex="0"/>
+        <ComboBox Grid.Row="11" Grid.Column="1" Height="25px" ItemsSource="{Binding OpCodes}" SelectedValue="{Binding SelectedOpCode}" SelectedIndex="0"/>
+        <ComboBox Grid.Row="12" Grid.Column="1" Height="25px" ItemsSource="{Binding ResponseCodes}" SelectedValue="{Binding SelectedResponseCode}" SelectedIndex="0"/>
+    </Grid>
+</UserControl>

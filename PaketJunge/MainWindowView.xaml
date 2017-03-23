@@ -18,6 +18,7 @@
             <StackPanel Margin="30 10 30 0" Orientation="Horizontal">
                 <Image Margin="0 0 5 0" Width="24" Source="pack://siteoforigin:,,,/Resources/PaketJunge.png"/>
                 <TextBlock FontSize="20px" Text="Paket, Junge!"/>
+                <Button Content="Send" Margin="10 0 0 0" Width="60px" Command="{Binding SendCommand}"/>
             </StackPanel>
 
             <TextBlock FontWeight="Medium" Margin="30 0 0 30" Text="Build your packet and click send."/>
@@ -59,8 +60,6 @@
                     <GroupBox BorderThickness="0" Header="Layer 7" MinHeight="100px">
                         <ContentPresenter Name="Layer7" HorizontalAlignment="Left" Content="{Binding Layer7}" ContentTemplateSelector="{StaticResource ViewTemplateSelector}"/>
                     </GroupBox>
-
-                    <Button Content="Send" Margin="15 10 0 0" HorizontalAlignment="Left" Width="100px" Command="{Binding SendCommand}"/>
                 </StackPanel>
             </Grid>
         </StackPanel>

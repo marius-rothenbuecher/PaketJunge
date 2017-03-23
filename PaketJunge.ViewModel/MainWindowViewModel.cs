@@ -2,14 +2,15 @@
 using System.ComponentModel;
 using System.Windows;
 using PaketJunge.Model;
+using PaketJunge.Model.Layer4;
 using PcapDotNet.Packets;
 using PcapDotNet.Packets.Ethernet;
 using PcapDotNet.Packets.IpV4;
 using SharpPcap;
-using System.Linq;
 
 namespace PaketJunge.ViewModel
 {
+    // TODO: add presets
     public class MainWindowViewModel : NotifyProperty
     {
         public Layer1ViewModel Layer1 { get => this.layer1; set { SetField(ref this.layer1, value, nameof(this.Layer1)); } }
@@ -46,6 +47,7 @@ namespace PaketJunge.ViewModel
             this.Layer5 = new EmptyLayer5ViewModel();
             this.Layer6 = new EmptyLayer6ViewModel();
             this.Layer7 = new DataViewModel();
+
             this.SendCommand = new RelayCommand<object>(Send);
 
             var deviceViewModel = (DeviceViewModel)this.Layer1;
@@ -59,13 +61,13 @@ namespace PaketJunge.ViewModel
                 PacketBuilder packetBuilder;
 
                 if (this.Layer2.GetType() == typeof(EmptyLayer2ViewModel))
-                    packetBuilder = new PacketBuilder(this.Layer7.GetData());
+                    packetBuilder = new PacketBuilder(this.Layer7.GetProtocolDataUnit());
                 else if (this.Layer3.GetType() == typeof(EmptyLayer3ViewModel))
-                    packetBuilder = new PacketBuilder(this.Layer2.GetFrame(), this.Layer7.GetData());
+                    packetBuilder = new PacketBuilder(this.Layer2.GetFrame(), this.Layer7.GetProtocolDataUnit());
                 else if (this.Layer4.GetType() == typeof(EmptyLayer4ViewModel))
-                    packetBuilder = new PacketBuilder(this.Layer2.GetFrame(), this.Layer3.GetPacket(), this.Layer7.GetData());
+                    packetBuilder = new PacketBuilder(this.Layer2.GetFrame(), this.Layer3.GetPacket(), this.Layer7.GetProtocolDataUnit());
                 else
-                    packetBuilder = new PacketBuilder(this.Layer2.GetFrame(), this.Layer3.GetPacket(), this.Layer4.GetSegment(), this.Layer7.GetData());
+                    packetBuilder = new PacketBuilder(this.Layer2.GetFrame(), this.Layer3.GetPacket(), this.Layer4.GetSegment(), this.Layer7.GetProtocolDataUnit());
 
                 var packet = packetBuilder.Build(DateTime.UtcNow);
 
@@ -120,7 +122,7 @@ namespace PaketJunge.ViewModel
 
                 var ethernetViewModel = (EthernetViewModel)this.Layer2;
                 ethernetViewModel.SourceMAC = mac;
-                ethernetViewModel.PropertyChanged += EthernetViewModelPropertyChanged;
+                ethernetViewModel.PropertyChanged += this.EthernetViewModelPropertyChanged;
             }
             else
             {
@@ -129,6 +131,7 @@ namespace PaketJunge.ViewModel
                 this.Layer4 = new EmptyLayer4ViewModel();
                 this.Layer5 = new EmptyLayer5ViewModel();
                 this.Layer6 = new EmptyLayer6ViewModel();
+                this.Layer7 = new DataViewModel();
             }
         }
 
@@ -144,7 +147,7 @@ namespace PaketJunge.ViewModel
                     this.Layer4 = new EmptyLayer4ViewModel();
                     
                     var ipv4ViewModel = (IPv4ViewModel)this.Layer3;
-                    ipv4ViewModel.PropertyChanged += IPv4ViewModelPropertyChanged;
+                    ipv4ViewModel.PropertyChanged += this.IPv4ViewModelPropertyChanged;
                 }
                 else if (type == EthernetType.IpV6.ToString())
                 {
@@ -152,7 +155,7 @@ namespace PaketJunge.ViewModel
                     this.Layer4 = new EmptyLayer4ViewModel();
 
                     var ipv6ViewModel = (IPv6ViewModel)this.Layer3;
-                    ipv6ViewModel.PropertyChanged += IPv6ViewModel_PropertyChanged;
+                    ipv6ViewModel.PropertyChanged += this.IPv6ViewModelPropertyChanged;
                 }
                 else if (type == EthernetType.Arp.ToString())
                 {
@@ -174,28 +177,63 @@ namespace PaketJunge.ViewModel
                 string protocol = ((IPv4ViewModel)sender).SelectedProtocol;
 
                 if (protocol == IpV4Protocol.Tcp.ToString())
+                {
                     this.Layer4 = new TCPViewModel();
+                }
                 else if (protocol == IpV4Protocol.Udp.ToString())
+                {
                     this.Layer4 = new UDPViewModel();
+
+                    var udpViewModel = (UDPViewModel)this.Layer4;
+                    udpViewModel.PropertyChanged += this.UDPViewModelPropertyChanged;
+                }
                 else if (protocol == IpV4Protocol.InternetControlMessageProtocol.ToString())
+                {
                     this.Layer4 = new ICMPViewModel();
+                }
                 else
+                {
                     this.Layer4 = new EmptyLayer4ViewModel();
+                }
             }
         }
 
-        private void IPv6ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void IPv6ViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(IPv4ViewModel.SelectedProtocol))
             {
                 string protocol = ((IPv6ViewModel)sender).SelectedProtocol;
 
                 if (protocol == IpV4Protocol.Tcp.ToString())
+                {
                     this.Layer4 = new TCPViewModel();
+                }
                 else if (protocol == IpV4Protocol.Udp.ToString())
+                {
                     this.Layer4 = new UDPViewModel();
+
+                    var udpViewModel = (UDPViewModel)this.Layer4;
+                    udpViewModel.PropertyChanged += this.UDPViewModelPropertyChanged;
+                }
                 else
+                {
                     this.Layer4 = new EmptyLayer4ViewModel();
+                }
+            }
+        }
+
+        private void UDPViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(UDPViewModel.SelectedProtocol))
+            {
+                string protocol = ((UDPViewModel)sender).SelectedProtocol;
+
+                if (protocol == UDPProtocol.DNS.ToString())
+                    this.Layer7 = new DNSViewModel();
+                else if (protocol == UDPProtocol.SMB.ToString())
+                    return;
+                else
+                    this.Layer7 = new DataViewModel();
             }
         }
     }
