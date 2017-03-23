@@ -7,4 +7,6 @@ Current release: [Download](https://github.com/marius-rothenbuecher/PaketJunge/r
 
 Execute **PaketJunge.View.exe** to start.
 
+Watch traffic using wireshark.
+
 ![Image of PaketJunge](https://github.com/marius-rothenbuecher/PaketJunge/raw/master/screenshot01.png)
