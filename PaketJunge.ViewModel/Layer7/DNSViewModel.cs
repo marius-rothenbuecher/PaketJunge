@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using PaketJunge.Model.Layer7;
 using PcapDotNet.Packets;
@@ -57,6 +58,19 @@ namespace PaketJunge.ViewModel
         public string SelectedResponseCode { get { return this.selectedResponseCode; } set { SetField<string>(ref this.selectedResponseCode, value, nameof(this.SelectedResponseCode)); } }
         private string selectedResponseCode;
 
+        public ObservableCollection<DNSQuery> Queries { get { return this.queries; } set { SetField<ObservableCollection<DNSQuery>>(ref this.queries, value, nameof(this.Queries)); } }
+        private ObservableCollection<DNSQuery> queries;
+
+        public List<string> DNSTypes { get { return this.dnsTypes; } set { SetField<List<string>>(ref this.dnsTypes, value, nameof(this.DNSTypes)); } }
+        private List<string> dnsTypes;
+
+        public List<string> DNSClasses { get { return this.dnsClasses; } set { SetField<List<string>>(ref this.dnsClasses, value, nameof(this.DNSClasses)); } }
+        private List<string> dnsClasses;
+
+        public RelayCommand<object> AddQueryCommand { get; set; }
+
+        public RelayCommand<object> ClearQueriesCommand { get; set; }
+
         public DNSViewModel()
         {
             this.compressionModes = DNSModel.GetCompressionModes();
@@ -67,6 +81,17 @@ namespace PaketJunge.ViewModel
 
             this.responseCodes = DNSModel.GetResponseCodes();
             this.selectedResponseCode = nameof(DnsResponseCode.NoError);
+
+            this.dnsTypes = DNSModel.GetDNSTypes();
+            this.dnsClasses = DNSModel.GetDNSClasses();
+
+            this.isQuery = true;
+            this.isRecursionDesired = true;
+
+            this.Queries = new ObservableCollection<DNSQuery>();
+
+            this.AddQueryCommand = new RelayCommand<object>(this.AddQuery);
+            this.ClearQueriesCommand = new RelayCommand<object>(this.ClearQueries);
         }
 
         public override ILayer GetProtocolDataUnit()
@@ -80,7 +105,6 @@ namespace PaketJunge.ViewModel
             var additionals = new List<DnsDataResourceRecord>();
             var answers = new List<DnsDataResourceRecord>();
             var authorities = new List<DnsDataResourceRecord>();
-            var queries = new List<DnsQueryResourceRecord>();
 
             var dnsLayer = new DnsLayer()
             {
@@ -99,13 +123,23 @@ namespace PaketJunge.ViewModel
                 IsResponse = this.IsResponse,
                 IsTruncated = this.IsTruncated,
                 OpCode = opCode,
-                Queries = queries,
+                Queries = DNSModel.GetDnsQueryRecords(this.Queries),
                 ResponseCode = responseCode
             };
 
             return dnsLayer;
 
             // TODO move to SMB | return new PayloadLayer() { Data = new Datagram(bytes) };
+        }
+
+        private void AddQuery(object obj)
+        {
+            this.Queries.Add(new DNSQuery(DnsType.A.ToString(), DnsClass.Internet.ToString(), "www.example.com"));
+        }
+
+        private void ClearQueries(object obj)
+        {
+            this.Queries = new ObservableCollection<DNSQuery>();
         }
 
         private byte[] StringToByteArray(string hex)

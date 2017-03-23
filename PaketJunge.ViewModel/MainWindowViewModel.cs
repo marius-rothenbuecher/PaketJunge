@@ -185,6 +185,7 @@ namespace PaketJunge.ViewModel
                     this.Layer4 = new UDPViewModel();
 
                     var udpViewModel = (UDPViewModel)this.Layer4;
+                    udpViewModel.SourcePort = 1337;
                     udpViewModel.PropertyChanged += this.UDPViewModelPropertyChanged;
                 }
                 else if (protocol == IpV4Protocol.InternetControlMessageProtocol.ToString())
