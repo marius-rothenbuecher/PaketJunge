@@ -96,12 +96,10 @@ namespace PaketJunge.ViewModel
 
         public override ILayer GetProtocolDataUnit()
         {
-            // TODO move to SMB | var bytes = Encoding.Default.GetBytes(this.Data);
             var compressionMode = (DnsDomainNameCompressionMode)Enum.Parse(typeof(DnsDomainNameCompressionMode), this.SelectedCompressionMode);
             var opCode = (DnsOpCode)Enum.Parse(typeof(DnsOpCode), this.SelectedOpCode);
             var responseCode = (DnsResponseCode)Enum.Parse(typeof(DnsResponseCode), this.SelectedResponseCode);
-
-            // TODO: add to view
+            
             var additionals = new List<DnsDataResourceRecord>();
             var answers = new List<DnsDataResourceRecord>();
             var authorities = new List<DnsDataResourceRecord>();
@@ -128,8 +126,6 @@ namespace PaketJunge.ViewModel
             };
 
             return dnsLayer;
-
-            // TODO move to SMB | return new PayloadLayer() { Data = new Datagram(bytes) };
         }
 
         private void AddQuery(object obj)

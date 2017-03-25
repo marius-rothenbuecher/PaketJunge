@@ -7,6 +7,7 @@ using PcapDotNet.Packets;
 using PcapDotNet.Packets.Ethernet;
 using PcapDotNet.Packets.IpV4;
 using SharpPcap;
+using System.Text;
 
 namespace PaketJunge.ViewModel
 {
@@ -38,17 +39,15 @@ namespace PaketJunge.ViewModel
 
         public RelayCommand<object> SendCommand { get; set; }
 
+        public RelayCommand<object> Layer7ToDataCommand { get; set; }
+
         public MainWindowViewModel()
         {
             this.Layer1 = new DeviceViewModel();
-            this.Layer2 = new EmptyLayer2ViewModel();
-            this.Layer3 = new EmptyLayer3ViewModel();
-            this.Layer4 = new EmptyLayer4ViewModel();
-            this.Layer5 = new EmptyLayer5ViewModel();
-            this.Layer6 = new EmptyLayer6ViewModel();
-            this.Layer7 = new DataViewModel();
+            this.ClearLayers(2);
 
-            this.SendCommand = new RelayCommand<object>(Send);
+            this.SendCommand = new RelayCommand<object>(this.Send);
+            this.Layer7ToDataCommand = new RelayCommand<object>(this.Layer7ToData);
 
             var deviceViewModel = (DeviceViewModel)this.Layer1;
             deviceViewModel.PropertyChanged += this.DeviceViewModelPropertyChanged;
@@ -85,6 +84,23 @@ namespace PaketJunge.ViewModel
             }
         }
 
+        private void Layer7ToData(object obj)
+        {
+            try
+            {
+                var pdu = this.Layer7.GetProtocolDataUnit();
+                byte[] buffer = new byte[pdu.Length];
+
+                pdu.Write(buffer, 0, pdu.Length, null, null);
+
+                this.Layer7 = new DataViewModel(this.ByteArrayToString(buffer));
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Message:\r\n{e.Message}\r\n\r\nStacktrace:\r\n{e.StackTrace}");
+            }
+        }
+
         private ICaptureDevice OpenDevice()
         {
             var device = CaptureDeviceList.Instance[this.Layer1.GetDevice()];
@@ -108,6 +124,30 @@ namespace PaketJunge.ViewModel
             return macAsString;
         }
 
+        public string ByteArrayToString(byte[] buffer)
+        {
+            string hex = BitConverter.ToString(buffer);
+            return hex.Replace("-", string.Empty);
+        }
+
+        private void ClearLayers(int layer)
+        {
+            if (layer <= 1)
+                this.Layer1 = new EmptyLayer1ViewModel();
+            if (layer <= 2)
+                this.Layer2 = new EmptyLayer2ViewModel();
+            if (layer <= 3)
+                this.Layer3 = new EmptyLayer3ViewModel();
+            if (layer <= 4)
+                this.Layer4 = new EmptyLayer4ViewModel();
+            if (layer <= 5)
+                this.Layer5 = new EmptyLayer5ViewModel();
+            if (layer <= 6)
+                this.Layer6 = new EmptyLayer6ViewModel();
+            if (layer <= 7)
+                this.Layer7 = new DataViewModel();
+        }
+
         private void DeviceViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             string standard = ((DeviceViewModel)sender).SelectedStandard;
@@ -126,12 +166,7 @@ namespace PaketJunge.ViewModel
             }
             else
             {
-                this.Layer2 = new EmptyLayer2ViewModel();
-                this.Layer3 = new EmptyLayer3ViewModel();
-                this.Layer4 = new EmptyLayer4ViewModel();
-                this.Layer5 = new EmptyLayer5ViewModel();
-                this.Layer6 = new EmptyLayer6ViewModel();
-                this.Layer7 = new DataViewModel();
+                this.ClearLayers(2);
             }
         }
 
@@ -144,15 +179,15 @@ namespace PaketJunge.ViewModel
                 if (type == EthernetType.IpV4.ToString())
                 {
                     this.Layer3 = new IPv4ViewModel();
-                    this.Layer4 = new EmptyLayer4ViewModel();
-                    
+                    this.ClearLayers(4);
+
                     var ipv4ViewModel = (IPv4ViewModel)this.Layer3;
                     ipv4ViewModel.PropertyChanged += this.IPv4ViewModelPropertyChanged;
                 }
                 else if (type == EthernetType.IpV6.ToString())
                 {
                     this.Layer3 = new IPv6ViewModel();
-                    this.Layer4 = new EmptyLayer4ViewModel();
+                    this.ClearLayers(4);
 
                     var ipv6ViewModel = (IPv6ViewModel)this.Layer3;
                     ipv6ViewModel.PropertyChanged += this.IPv6ViewModelPropertyChanged;
@@ -160,12 +195,11 @@ namespace PaketJunge.ViewModel
                 else if (type == EthernetType.Arp.ToString())
                 {
                     this.Layer3 = new ARPViewModel();
-                    this.Layer4 = new EmptyLayer4ViewModel();
+                    this.ClearLayers(4);
                 }
                 else
                 {
-                    this.Layer3 = new EmptyLayer3ViewModel();
-                    this.Layer4 = new EmptyLayer4ViewModel();
+                    this.ClearLayers(3);
                 }
             }
         }
@@ -194,7 +228,7 @@ namespace PaketJunge.ViewModel
                 }
                 else
                 {
-                    this.Layer4 = new EmptyLayer4ViewModel();
+                    this.ClearLayers(4);
                 }
             }
         }
@@ -218,7 +252,7 @@ namespace PaketJunge.ViewModel
                 }
                 else
                 {
-                    this.Layer4 = new EmptyLayer4ViewModel();
+                    this.ClearLayers(4);
                 }
             }
         }
@@ -234,10 +268,10 @@ namespace PaketJunge.ViewModel
                     this.Layer7 = new DNSViewModel();
                     ((UDPViewModel)this.Layer4).DestinationPort = 53;
                 }
-                else if (protocol == UDPProtocol.SMB.ToString())
-                    return;
                 else
+                {
                     this.Layer7 = new DataViewModel();
+                }
             }
         }
     }

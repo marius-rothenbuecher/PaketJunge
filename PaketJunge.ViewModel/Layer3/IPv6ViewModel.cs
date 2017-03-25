@@ -41,7 +41,7 @@ namespace PaketJunge.ViewModel
             this.trafficClass = 0;
         }
 
-        // TODO: add extension heades
+        // TODO: add extension headers
         public override ILayer GetPacket()
 		{
             return new IpV6Layer()

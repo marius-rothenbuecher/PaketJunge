@@ -17,6 +17,12 @@ namespace PaketJunge.ViewModel
             this.data = string.Empty;
         }
 
+        public DataViewModel(string byteStream)
+        {
+            this.data = byteStream;
+            this.IsByteStream = true;
+        }
+
         public override ILayer GetProtocolDataUnit()
         {
             if (this.IsByteStream)

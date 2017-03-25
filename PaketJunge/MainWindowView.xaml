@@ -19,6 +19,7 @@
                 <Image Margin="0 0 5 0" Width="24" Source="pack://siteoforigin:,,,/Resources/PaketJunge.png"/>
                 <TextBlock FontSize="20px" Text="Paket, Junge!"/>
                 <Button Content="Send" Margin="10 0 0 0" Width="60px" Command="{Binding SendCommand}"/>
+                <Button Content="Layer 7 to Byte Stream" Margin="10 0 0 0" Width="170px" Command="{Binding Layer7ToDataCommand}"/>
             </StackPanel>
 
             <TextBlock FontWeight="Medium" Margin="30 0 0 30" Text="Build your packet and click send."/>

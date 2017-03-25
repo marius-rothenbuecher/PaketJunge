@@ -3,7 +3,6 @@
     public enum UDPProtocol
     {
         DNS,
-        None,
-        SMB
+        None
     }
 }
