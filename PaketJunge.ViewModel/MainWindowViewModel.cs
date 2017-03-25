@@ -1,5 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
 using System.Windows;
 using PaketJunge.Model;
 using PaketJunge.Model.Layer4;
@@ -7,13 +10,16 @@ using PcapDotNet.Packets;
 using PcapDotNet.Packets.Ethernet;
 using PcapDotNet.Packets.IpV4;
 using SharpPcap;
-using System.Text;
+using System.Runtime.InteropServices;
 
 namespace PaketJunge.ViewModel
 {
     // TODO: add presets
     public class MainWindowViewModel : NotifyProperty
     {
+        [DllImport("iphlpapi.dll")]
+        public static extern int SendARP(int DestIP, int SrcIP, [Out] byte[] pMacAddr, ref int PhyAddrLen);
+
         public Layer1ViewModel Layer1 { get => this.layer1; set { SetField(ref this.layer1, value, nameof(this.Layer1)); } }
         private Layer1ViewModel layer1;
 
@@ -148,6 +154,29 @@ namespace PaketJunge.ViewModel
                 this.Layer7 = new DataViewModel();
         }
 
+        public IPAddress GetDefaultGateway()
+        {
+            return NetworkInterface
+                .GetAllNetworkInterfaces()
+                .Where(n => n.OperationalStatus == OperationalStatus.Up)
+                .SelectMany(n => n.GetIPProperties()?.GatewayAddresses)
+                .Select(g => g?.Address)
+                .FirstOrDefault(a => a != null);
+        }
+        
+        private string GetMACAddress(IPAddress ip)
+        {
+            var ipAddress = ip;
+            int length = 6;
+            byte[] mac = new byte[length];
+
+            SendARP((int)ipAddress.Address, 0, mac, ref length);
+
+            string macAddress = BitConverter.ToString(mac, 0, length).Replace("-", ":");
+
+            return macAddress;
+        }
+
         private void DeviceViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             string standard = ((DeviceViewModel)sender).SelectedStandard;
@@ -183,6 +212,19 @@ namespace PaketJunge.ViewModel
 
                     var ipv4ViewModel = (IPv4ViewModel)this.Layer3;
                     ipv4ViewModel.PropertyChanged += this.IPv4ViewModelPropertyChanged;
+
+                    var defaultGateway = this.GetDefaultGateway();
+
+                    if (defaultGateway != null)
+                    {
+                        ipv4ViewModel.DestinationIP = defaultGateway.ToString();
+                        
+                        if (this.Layer2 is EthernetViewModel)
+                        {
+                            var ethernetViewModel = (EthernetViewModel)this.Layer2;
+                            ethernetViewModel.DestinationMAC = this.GetMACAddress(defaultGateway);
+                        }
+                    }
                 }
                 else if (type == EthernetType.IpV6.ToString())
                 {
