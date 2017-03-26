@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Runtime.InteropServices;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
@@ -10,7 +11,6 @@ using PcapDotNet.Packets;
 using PcapDotNet.Packets.Ethernet;
 using PcapDotNet.Packets.IpV4;
 using SharpPcap;
-using System.Runtime.InteropServices;
 
 namespace PaketJunge.ViewModel
 {
@@ -18,7 +18,7 @@ namespace PaketJunge.ViewModel
     public class MainWindowViewModel : NotifyProperty
     {
         [DllImport("iphlpapi.dll")]
-        public static extern int SendARP(int DestIP, int SrcIP, [Out] byte[] pMacAddr, ref int PhyAddrLen);
+        public static extern int SendARP(int destinationIp, int sourceIp, [Out] byte[] macAddress, ref int macLength);
 
         public Layer1ViewModel Layer1 { get => this.layer1; set { SetField(ref this.layer1, value, nameof(this.Layer1)); } }
         private Layer1ViewModel layer1;
@@ -154,16 +154,30 @@ namespace PaketJunge.ViewModel
                 this.Layer7 = new DataViewModel();
         }
 
-        public IPAddress GetDefaultGateway()
+        private IPAddress GetDefaultIPv4Gateway()
         {
             return NetworkInterface
                 .GetAllNetworkInterfaces()
-                .Where(n => n.OperationalStatus == OperationalStatus.Up)
-                .SelectMany(n => n.GetIPProperties()?.GatewayAddresses)
-                .Select(g => g?.Address)
+                .Where(x => x.OperationalStatus == OperationalStatus.Up)
+                .SelectMany(x => x.GetIPProperties()?.GatewayAddresses)
+                .Where(x => x.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                .Select(x => x?.Address)
+                .FirstOrDefault(x => x != null);
+        }
+
+        private IPAddress GetAssignedIPv4Address()
+        {
+            return NetworkInterface
+                .GetAllNetworkInterfaces()
+                .Where(x => x.OperationalStatus == OperationalStatus.Up)
+                .Where(x => x.GetIPProperties() != null)
+                .Where(x => x.GetIPProperties().GatewayAddresses.Any(y => y.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork))
+                .SelectMany(x => x.GetIPProperties()?.UnicastAddresses)
+                .Where(x => x.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                .Select(x => x?.Address)
                 .FirstOrDefault(a => a != null);
         }
-        
+
         private string GetMACAddress(IPAddress ip)
         {
             var ipAddress = ip;
@@ -213,7 +227,8 @@ namespace PaketJunge.ViewModel
                     var ipv4ViewModel = (IPv4ViewModel)this.Layer3;
                     ipv4ViewModel.PropertyChanged += this.IPv4ViewModelPropertyChanged;
 
-                    var defaultGateway = this.GetDefaultGateway();
+                    var defaultGateway = this.GetDefaultIPv4Gateway();
+                    var ipAddress = this.GetAssignedIPv4Address();
 
                     if (defaultGateway != null)
                     {
@@ -222,9 +237,15 @@ namespace PaketJunge.ViewModel
                         if (this.Layer2 is EthernetViewModel)
                         {
                             var ethernetViewModel = (EthernetViewModel)this.Layer2;
-                            ethernetViewModel.DestinationMAC = this.GetMACAddress(defaultGateway);
+                            var mac = this.GetMACAddress(defaultGateway);
+
+                            if (mac != null)
+                                ethernetViewModel.DestinationMAC = mac;
                         }
                     }
+
+                    if (ipAddress != null)
+                        ipv4ViewModel.SourceIP = this.GetAssignedIPv4Address().ToString();
                 }
                 else if (type == EthernetType.IpV6.ToString())
                 {
@@ -237,6 +258,11 @@ namespace PaketJunge.ViewModel
                 else if (type == EthernetType.Arp.ToString())
                 {
                     this.Layer3 = new ARPViewModel();
+                    this.ClearLayers(4);
+                }
+                else if (type == EthernetType.PROFINET.ToString())
+                {
+                    this.Layer3 = new PROFINETViewModel();
                     this.ClearLayers(4);
                 }
                 else

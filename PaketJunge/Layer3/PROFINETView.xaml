@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="PaketJunge.View.PROFINETView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Height="200" MinWidth="500" Width="Auto" Padding="10px" FontWeight="Normal">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="30px"></RowDefinition>
+			<RowDefinition Height="30px"></RowDefinition>
+			<RowDefinition Height="30px"></RowDefinition>
+			<RowDefinition Height="30px"></RowDefinition>
+			<RowDefinition Height="30px"></RowDefinition>
+			<RowDefinition Height="30px"></RowDefinition>
+            <RowDefinition Height="30px"></RowDefinition>
+            <RowDefinition Height="30px"></RowDefinition>
+            <RowDefinition Height="30px"></RowDefinition>
+            <RowDefinition Height="30px"></RowDefinition>
+        </Grid.RowDefinitions>
+
+		<TextBlock Grid.Row="0" Grid.Column="0" Text="DCP type"/>
+		<TextBlock Grid.Row="1" Grid.Column="0" Text="DCP service id"/>
+		<TextBlock Grid.Row="2" Grid.Column="0" Text="DCP service type"/>
+		<TextBlock Grid.Row="3" Grid.Column="0" Text="Xid"/>
+		<TextBlock Grid.Row="4" Grid.Column="0" Text="Response delay"/>
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="DCP data length"/>
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="DCP block option"/>
+        <TextBlock Grid.Row="7" Grid.Column="0" Text="DCP block sub option"/>
+        <TextBlock Grid.Row="8" Grid.Column="0" Text="DCP block length"/>
+        <ComboBox Grid.Row="0" Grid.Column="1" Height="25px" ItemsSource="{Binding DCPTypes}" SelectedValue="{Binding SelectedDCPType, Mode=TwoWay}" SelectedIndex="0"/>
+        <ComboBox Grid.Row="1" Grid.Column="1" Height="25px" ItemsSource="{Binding DCPServiceIds}" SelectedValue="{Binding SelectedDCPServiceId, Mode=TwoWay}" SelectedIndex="0"/>
+        <ComboBox Grid.Row="2" Grid.Column="1" Height="25px" ItemsSource="{Binding DCPServiceTypes}" SelectedValue="{Binding SelectedDCPServiceType, Mode=TwoWay}" SelectedIndex="0"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Height="25px" Text="{Binding Xid}" Margin="0,3"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Height="25px" Text="{Binding ResponseDelay}" Margin="0,3"/>
+        <TextBox Grid.Row="5" Grid.Column="1" Height="25px" Text="{Binding DCPDataLength}" Margin="0,3"/>
+        <TextBox Grid.Row="6" Grid.Column="1" Height="25px" Text="{Binding DCPBlockOption}" Margin="0,3"/>
+        <TextBox Grid.Row="7" Grid.Column="1" Height="25px" Text="{Binding DCPBlockSubOption}" Margin="0,3"/>
+        <TextBox Grid.Row="8" Grid.Column="1" Height="25px" Text="{Binding DCPBlockLEngth}" Margin="0,3"/>
+	</Grid>
+</UserControl>

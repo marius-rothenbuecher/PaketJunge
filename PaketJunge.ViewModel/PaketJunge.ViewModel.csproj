@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PaketJunge.ViewModel</RootNamespace>
     <AssemblyName>PaketJunge.ViewModel</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,6 +51,7 @@
     <Compile Include="Layer1\EmptyLayer1ViewModel.cs" />
     <Compile Include="Layer2\EmptyLayer2ViewModel.cs" />
     <Compile Include="Layer3\EmptyLayer3ViewModel.cs" />
+    <Compile Include="Layer3\PROFINETViewModel.cs" />
     <Compile Include="Layer4\EmptyLayer4ViewModel.cs" />
     <Compile Include="Layer4\IcmpViewModel.cs" />
     <Compile Include="Layer5\EmptyLayer5ViewModel.cs" />
@@ -79,6 +81,10 @@
     <ProjectReference Include="..\PaketJunge.Model\PaketJunge.Model.csproj">
       <Project>{0ef278cb-c8e1-4a21-bc1c-4d6e0b8339d7}</Project>
       <Name>PaketJunge.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PaketJunge.Packets\PaketJunge.Packets.csproj">
+      <Project>{f4dd4817-1744-445e-8f47-f2b1a59a52aa}</Project>
+      <Name>PaketJunge.Packets</Name>
     </ProjectReference>
     <ProjectReference Include="..\PcapDotNet.Base\PcapDotNet.Base.csproj">
       <Project>{83e805c9-4d29-4e34-a27e-5a78690fbd2b}</Project>

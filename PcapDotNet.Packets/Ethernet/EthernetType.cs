@@ -79,6 +79,10 @@ namespace PcapDotNet.Packets.Ethernet
         /// </summary>
         ExtensibleAuthenticationProtocolOverLan = 0x888E,
         /// <summary>
+        /// PROFINET
+        /// </summary>
+        PROFINET = 0x8892,
+        /// <summary>
         /// HyperSCSI (SCSI over Ethernet)
         /// </summary>
         HyperScsi = 0x889A,

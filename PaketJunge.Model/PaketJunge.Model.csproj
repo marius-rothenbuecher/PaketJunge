@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PaketJunge.Model</RootNamespace>
     <AssemblyName>PaketJunge.Model</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -48,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Layer1\DeviceModel.cs" />
     <Compile Include="Layer2\EthernetModel.cs" />
+    <Compile Include="Layer3\PROFINETModel.cs" />
     <Compile Include="Layer3\ARPModel.cs" />
     <Compile Include="Layer3\IPv6Model.cs" />
     <Compile Include="Layer3\IPv4Model.cs" />
@@ -67,6 +69,10 @@
     <Folder Include="Layer6\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PaketJunge.Packets\PaketJunge.Packets.csproj">
+      <Project>{f4dd4817-1744-445e-8f47-f2b1a59a52aa}</Project>
+      <Name>PaketJunge.Packets</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PcapDotNet.Base\PcapDotNet.Base.csproj">
       <Project>{83e805c9-4d29-4e34-a27e-5a78690fbd2b}</Project>
       <Name>PcapDotNet.Base</Name>
