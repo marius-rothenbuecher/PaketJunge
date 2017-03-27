@@ -1,4 +1,4 @@
-﻿namespace PaketJunge.Packets.PROFINET
+﻿namespace PaketJunge.Packets.PROFINET.DCP
 {
     public enum DCPType
     {

@@ -260,9 +260,9 @@ namespace PaketJunge.ViewModel
                     this.Layer3 = new ARPViewModel();
                     this.ClearLayers(4);
                 }
-                else if (type == EthernetType.PROFINET.ToString())
+                else if (type == EthernetType.PROFINETDCP.ToString())
                 {
-                    this.Layer3 = new PROFINETViewModel();
+                    this.Layer3 = new PROFINETDCPViewModel();
                     this.ClearLayers(4);
                 }
                 else

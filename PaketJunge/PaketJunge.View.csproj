@@ -77,8 +77,8 @@
     <Compile Include="Layer2\EmptyLayer2View.xaml.cs">
       <DependentUpon>EmptyLayer2View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Layer3\PROFINETView.xaml.cs">
-      <DependentUpon>PROFINETView.xaml</DependentUpon>
+    <Compile Include="Layer3\PROFINETDCPView.xaml.cs">
+      <DependentUpon>PROFINETDCPView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Layer3\EmptyLayer3View.xaml.cs">
       <DependentUpon>EmptyLayer3View.xaml</DependentUpon>
@@ -124,7 +124,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Layer3\PROFINETView.xaml">
+    <Page Include="Layer3\PROFINETDCPView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

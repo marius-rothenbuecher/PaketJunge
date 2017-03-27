@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using PaketJunge.Packets.PROFINET;
+using PaketJunge.Packets.PROFINET.DCP;
 
 namespace PaketJunge.Model
 {
-	public class PROFINETModel
+	public class PROFINETDCPModel
 	{
         public static List<string> GetDCPServiceIds()
         {

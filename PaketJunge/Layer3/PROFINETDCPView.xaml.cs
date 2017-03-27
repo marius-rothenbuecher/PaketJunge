@@ -4,11 +4,11 @@ using System.Windows.Controls;
 namespace PaketJunge.View
 {
     /// <summary>
-    /// Interaction logic for PROFINETView.xaml
+    /// Interaction logic for PROFINETDCPView.xaml
     /// </summary>
-    public partial class PROFINETView : UserControl
+    public partial class PROFINETDCPView : UserControl
 	{
-		public PROFINETView()
+		public PROFINETDCPView()
 		{
 			InitializeComponent();
 		}

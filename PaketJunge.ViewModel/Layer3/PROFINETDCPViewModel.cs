@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using PaketJunge.Model;
-using PaketJunge.Packets.PROFINET;
+using PaketJunge.Packets.PROFINET.DCP;
 using PcapDotNet.Packets;
 
 namespace PaketJunge.ViewModel
 {
-    public class PROFINETViewModel : Layer3ViewModel
+    public class PROFINETDCPViewModel : Layer3ViewModel
     {
         public ushort DCPBlockLength { get { return this.dcpBlockLength; } set { SetField<ushort>(ref this.dcpBlockLength, value, nameof(this.DCPBlockLength)); } }
         private ushort dcpBlockLength;
@@ -44,11 +44,11 @@ namespace PaketJunge.ViewModel
         public uint Xid { get { return this.xid; } set { SetField<uint>(ref this.xid, value, nameof(this.Xid)); } }
         private uint xid;
 
-        public PROFINETViewModel()
+        public PROFINETDCPViewModel()
         {
-            this.dcpServiceIds = PROFINETModel.GetDCPServiceIds();
-            this.dcpServiceTypes = PROFINETModel.GetDCPServiceTypes();
-            this.dcpTypes = PROFINETModel.GetDCPTypes();
+            this.dcpServiceIds = PROFINETDCPModel.GetDCPServiceIds();
+            this.dcpServiceTypes = PROFINETDCPModel.GetDCPServiceTypes();
+            this.dcpTypes = PROFINETDCPModel.GetDCPTypes();
 
             this.selectedDCPServiceId = DCPServiceId.Identify.ToString();
             this.selectedDCPServiceType = DCPServiceType.Request.ToString();
@@ -63,7 +63,7 @@ namespace PaketJunge.ViewModel
 
         public override ILayer GetPacket()
         {
-            return new PROFINETLayer()
+            return new PROFINETDCPLayer()
             {
                 DCPBlockLength = this.DCPBlockLength,
                 DCPBlockOption = this.DCPBlockOption,

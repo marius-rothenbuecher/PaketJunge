@@ -1,11 +1,11 @@
 ﻿using System;
 using PcapDotNet.Packets;
 
-namespace PaketJunge.Packets.PROFINET
+namespace PaketJunge.Packets.PROFINET.DCP
 {
-    public class PROFINETLayer : SimpleLayer
+    public class PROFINETDCPLayer : SimpleLayer
     {
-        public PROFINETLayer()
+        public PROFINETDCPLayer()
         {
             this.DCPBlockLength = 0;
             this.DCPBlockOption = 0;

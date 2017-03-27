@@ -49,7 +49,7 @@
   <ItemGroup>
     <Compile Include="Layer1\DeviceModel.cs" />
     <Compile Include="Layer2\EthernetModel.cs" />
-    <Compile Include="Layer3\PROFINETModel.cs" />
+    <Compile Include="Layer3\PROFINETDCPModel.cs" />
     <Compile Include="Layer3\ARPModel.cs" />
     <Compile Include="Layer3\IPv6Model.cs" />
     <Compile Include="Layer3\IPv4Model.cs" />

@@ -41,10 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PROFINET\PROFINETLayer.cs" />
-    <Compile Include="PROFINET\DCPServiceId.cs" />
-    <Compile Include="PROFINET\DCPServiceType.cs" />
-    <Compile Include="PROFINET\DCPType.cs" />
+    <Compile Include="PROFINET\DCP\PROFINETDCPLayer.cs" />
+    <Compile Include="PROFINET\DCP\DCPServiceId.cs" />
+    <Compile Include="PROFINET\DCP\DCPServiceType.cs" />
+    <Compile Include="PROFINET\DCP\DCPType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
