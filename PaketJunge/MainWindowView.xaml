@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:v="clr-namespace:PaketJunge.View"
         xmlns:vm="clr-namespace:PaketJunge.ViewModel;assembly=PaketJunge.ViewModel" 
-		Title="Paket, Junge!" Width="1280" Height="720" Background="LightBlue" FontSize="15px" FontWeight="Bold" WindowState="Maximized" Foreground="#222" Icon="pack://siteoforigin:,,,/Resources/PaketJunge.png">
+		Title="Paket, Junge!" Width="1280" Height="720" Background="White" FontSize="15px" FontWeight="Bold" WindowState="Maximized" Foreground="White" Icon="pack://siteoforigin:,,,/Resources/PaketJunge.png">
 
     <Window.DataContext>
         <vm:MainWindowViewModel/>
@@ -17,12 +17,12 @@
         <StackPanel>
             <StackPanel Margin="30 10 30 0" Orientation="Horizontal">
                 <Image Margin="0 0 5 0" Width="24" Source="pack://siteoforigin:,,,/Resources/PaketJunge.png"/>
-                <TextBlock FontSize="20px" Text="Paket, Junge!"/>
+                <TextBlock Foreground="Black"  FontSize="20px" Text="Paket, Junge!"/>
                 <Button Content="Send" Margin="10 0 0 0" Width="60px" Command="{Binding SendCommand}"/>
                 <Button Content="Layer 7 to Byte Stream" Margin="10 0 0 0" Width="170px" Command="{Binding Layer7ToDataCommand}"/>
             </StackPanel>
 
-            <TextBlock FontWeight="Medium" Margin="30 0 0 30" Text="Build your packet and click send."/>
+            <TextBlock Foreground="Black" FontWeight="Medium" Margin="30 0 0 30" Text="Build your packet and click send."/>
 
             <Grid Margin="30 0 30 30">
                 <Grid.ColumnDefinitions>
@@ -32,35 +32,70 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0">
-                    <GroupBox BorderThickness="0" Header="Layer 1" MinHeight="100px">
-                        <ContentPresenter Name="Layer1" HorizontalAlignment="Left" Content="{Binding Layer1}" ContentTemplateSelector="{StaticResource ViewTemplateSelector}"/>
-                    </GroupBox>
+                    <Border Background="#3B5998">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#555555" Direction="-90" BlurRadius="20"/>
+                        </Border.Effect>
+                        <GroupBox BorderThickness="0" Header="Layer 1" MinHeight="100px">
+                            <ContentPresenter Name="Layer1" HorizontalAlignment="Left" Content="{Binding Layer1}" ContentTemplateSelector="{StaticResource ViewTemplateSelector}"/>
+                        </GroupBox>
+                    </Border>
 
-                    <GroupBox BorderThickness="0" Header="Layer 2" MinHeight="100px">
-                        <ContentPresenter Name="Layer2" HorizontalAlignment="Left" Content="{Binding Layer2}" ContentTemplateSelector="{StaticResource ViewTemplateSelector}"/>
-                    </GroupBox>
+                    <Border Background="#3B5998" Margin="0 20 0 0">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#555555" Direction="-90" BlurRadius="20"/>
+                        </Border.Effect>
+                        <GroupBox BorderThickness="0" Header="Layer 2" MinHeight="100px">
+                            <ContentPresenter Name="Layer2" HorizontalAlignment="Left" Content="{Binding Layer2}" ContentTemplateSelector="{StaticResource ViewTemplateSelector}"/>
+                        </GroupBox>
+                    </Border>
 
-                    <GroupBox BorderThickness="0" Header="Layer 3" MinHeight="100px">
-                        <ContentPresenter Name="Layer3" HorizontalAlignment="Left" Content="{Binding Layer3}" ContentTemplateSelector="{StaticResource ViewTemplateSelector}"/>
-                    </GroupBox>
+                    <Border Background="#3B5998" Margin="0 20 0 0">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#555555" Direction="-90" BlurRadius="20"/>
+                        </Border.Effect>
+                        <GroupBox BorderThickness="0" Header="Layer 3" MinHeight="100px">
+                            <ContentPresenter Name="Layer3" HorizontalAlignment="Left" Content="{Binding Layer3}" ContentTemplateSelector="{StaticResource ViewTemplateSelector}"/>
+                        </GroupBox>
+                    </Border>
 
-                    <GroupBox BorderThickness="0" Header="Layer 4" MinHeight="100px">
-                        <ContentPresenter Name="Layer4" HorizontalAlignment="Left" Content="{Binding Layer4}" ContentTemplateSelector="{StaticResource ViewTemplateSelector}"/>
-                    </GroupBox>
+                    <Border Background="#3B5998" Margin="0 20 0 0">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#555555" Direction="-90" BlurRadius="20"/>
+                        </Border.Effect>
+                        <GroupBox BorderThickness="0" Header="Layer 4" MinHeight="100px">
+                            <ContentPresenter Name="Layer4" HorizontalAlignment="Left" Content="{Binding Layer4}" ContentTemplateSelector="{StaticResource ViewTemplateSelector}"/>
+                        </GroupBox>
+                    </Border>
                 </StackPanel>
 
                 <StackPanel Grid.Column="2">
-                    <GroupBox BorderThickness="0" Header="Layer 5" MinHeight="100px">
-                        <ContentPresenter Name="Layer5" HorizontalAlignment="Left" Content="{Binding Layer5}" ContentTemplateSelector="{StaticResource ViewTemplateSelector}"/>
-                    </GroupBox>
+                    <Border Background="#3B5998">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#555555" Direction="-90" BlurRadius="20"/>
+                        </Border.Effect>
+                        <GroupBox BorderThickness="0" Header="Layer 5" MinHeight="100px">
+                            <ContentPresenter Name="Layer5" HorizontalAlignment="Left" Content="{Binding Layer5}" ContentTemplateSelector="{StaticResource ViewTemplateSelector}"/>
+                        </GroupBox>
+                    </Border>
 
-                    <GroupBox BorderThickness="0" Header="Layer 6" MinHeight="100px">
-                        <ContentPresenter Name="Layer6" HorizontalAlignment="Left" Content="{Binding Layer6}" ContentTemplateSelector="{StaticResource ViewTemplateSelector}"/>
-                    </GroupBox>
+                    <Border Background="#3B5998" Margin="0 20 0 0">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#555555" Direction="-90" BlurRadius="20"/>
+                        </Border.Effect>
+                        <GroupBox BorderThickness="0" Header="Layer 6" MinHeight="100px">
+                            <ContentPresenter Name="Layer6" HorizontalAlignment="Left" Content="{Binding Layer6}" ContentTemplateSelector="{StaticResource ViewTemplateSelector}"/>
+                        </GroupBox>
+                    </Border>
 
-                    <GroupBox BorderThickness="0" Header="Layer 7" MinHeight="100px">
-                        <ContentPresenter Name="Layer7" HorizontalAlignment="Left" Content="{Binding Layer7}" ContentTemplateSelector="{StaticResource ViewTemplateSelector}"/>
-                    </GroupBox>
+                    <Border Background="#3B5998" Margin="0 20 0 0">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#555555" Direction="-90" BlurRadius="20"/>
+                        </Border.Effect>
+                        <GroupBox BorderThickness="0" Header="Layer 7" MinHeight="100px">
+                            <ContentPresenter Name="Layer7" HorizontalAlignment="Left" Content="{Binding Layer7}" ContentTemplateSelector="{StaticResource ViewTemplateSelector}"/>
+                        </GroupBox>
+                    </Border>
                 </StackPanel>
             </Grid>
         </StackPanel>
