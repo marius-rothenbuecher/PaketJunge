@@ -37,8 +37,8 @@
         <TextBlock Grid.Row="8" Grid.Column="0" Text="Truncated" />
         <TextBlock Grid.Row="9" Grid.Column="0" Text="Id" />
         <TextBlock Grid.Row="10" Grid.Column="0" Text="Compression mode" />
-        <TextBlock Grid.Row="11" Grid.Column="0" Text="Op codes" />
-        <TextBlock Grid.Row="12" Grid.Column="0" Text="Response codes" />
+        <TextBlock Grid.Row="11" Grid.Column="0" Text="Op code" />
+        <TextBlock Grid.Row="12" Grid.Column="0" Text="Response code" />
         <StackPanel Grid.Row="13" Grid.Column="0" Orientation="Horizontal">
             <TextBlock Text="Queries" />
             <Button VerticalAlignment="Top" Content="Add" Margin="10 0 0 0" Width="50px" Height="25px" Command="{Binding AddQueryCommand}"/>

@@ -15,9 +15,9 @@
 			<RowDefinition Height="30px"></RowDefinition>
 		</Grid.RowDefinitions>
 
-		<TextBlock Grid.Row="0" Grid.Column="0" Text="Source Port"/>
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Destination Port"/>
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Protocol (upper)" />
+		<TextBlock Grid.Row="0" Grid.Column="0" Text="Source Port (16)"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Destination Port (16)"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Upper protocol (0)" />
         <TextBox Grid.Row="0" Grid.Column="1" Height="25px" Text="{Binding SourcePort}" Grid.ColumnSpan="2" Margin="0,3"/>
 		<TextBox Grid.Row="1" Grid.Column="1" Height="25px" Text="{Binding DestinationPort}" Grid.ColumnSpan="2" Margin="0,3"/>
         <ComboBox Grid.Row="2" Grid.Column="1" Height="25px" ItemsSource="{Binding Protocols}" SelectedValue="{Binding SelectedProtocol}" SelectedIndex="0"/>

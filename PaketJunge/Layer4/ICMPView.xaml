@@ -15,9 +15,9 @@
         </Grid.RowDefinitions>
 
         <TextBlock Text="ICMP is actually a layer 3 protocol."/>
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Data (byte stream)"/>
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Type and code" />
-        <TextBox Grid.Row="1" Grid.Column="1" Height="25px" Text="{Binding Data}" Margin="0,3"/>
-        <ComboBox Grid.Row="2" Grid.Column="1" Height="25px" ItemsSource="{Binding TypesAndCodes}" SelectedValue="{Binding SelectedTypeAndCode}" SelectedIndex="0"/>
-	</Grid>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Type and code (16)" />
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Data (byte stream)"/>
+        <ComboBox Grid.Row="1" Grid.Column="1" Height="25px" ItemsSource="{Binding TypesAndCodes}" SelectedValue="{Binding SelectedTypeAndCode}" SelectedIndex="0"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Height="25px" Text="{Binding Data}" Margin="0,3"/>
+    </Grid>
 </UserControl>

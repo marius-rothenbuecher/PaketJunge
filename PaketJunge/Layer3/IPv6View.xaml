@@ -17,16 +17,16 @@
             <RowDefinition Height="30px"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="Source IP"/>
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Destination IP"/>
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Flow label"/>
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="Traffic class"/>
-        <TextBlock Grid.Row="4" Grid.Column="0" Text="Hop limit"/>
-        <TextBlock Grid.Row="5" Grid.Column="0" Text="Protocol (upper)" />
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Source IP (128)"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Destination IP (128)"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Traffic class (8)"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Flow label (20)"/>
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Hop limit (8)"/>
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="Upper protocol (8)" />
         <TextBox Grid.Row="0" Grid.Column="1" Height="25px" Text="{Binding SourceIP}" Margin="0,3"/>
         <TextBox Grid.Row="1" Grid.Column="1" Height="25px" Text="{Binding DestinationIP}" Margin="0,3"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Height="25px" Text="{Binding TrafficClass}" Margin="0,3"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Height="25px" Text="{Binding FlowLabel}" Margin="0,3"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Height="25px" Text="{Binding FlowLabel}" Margin="0,3"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Height="25px" Text="{Binding TrafficClass}" Margin="0,3"/>
         <TextBox Grid.Row="4" Grid.Column="1" Height="25px" Text="{Binding HopLimit}" Margin="0,3"/>
         <ComboBox Grid.Row="5" Grid.Column="1" Height="25px" ItemsSource="{Binding Protocols}" SelectedValue="{Binding SelectedProtocol}" SelectedIndex="0"/>
     </Grid>

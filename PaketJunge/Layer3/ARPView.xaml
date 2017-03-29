@@ -18,17 +18,17 @@
 			<RowDefinition Height="30px"></RowDefinition>
 		</Grid.RowDefinitions>
 
-		<TextBlock Grid.Row="0" Grid.Column="0" Text="Source MAC"/>
-		<TextBlock Grid.Row="1" Grid.Column="0" Text="Destination MAC"/>
-		<TextBlock Grid.Row="2" Grid.Column="0" Text="Source IP"/>
-		<TextBlock Grid.Row="3" Grid.Column="0" Text="Destination IP"/>
-		<TextBlock Grid.Row="4" Grid.Column="0" Text="ARP operation"/>
-		<TextBlock Grid.Row="5" Grid.Column="0" Text="Protocol (ethernet type)"/>
-		<TextBox Grid.Row="0" Grid.Column="1" Height="25px" Text="{Binding SourceMAC}" Margin="0,3"/>
-		<TextBox Grid.Row="1" Grid.Column="1" Height="25px" Text="{Binding DestinationMAC}" Margin="0,3"/>
-		<TextBox Grid.Row="2" Grid.Column="1" Height="25px" Text="{Binding SourceIP}" Margin="0,3"/>
-		<TextBox Grid.Row="3" Grid.Column="1" Height="25px" Text="{Binding DestinationIP}" Margin="0,3"/>
-		<ComboBox Grid.Row="4" Grid.Column="1" Height="25px" ItemsSource="{Binding Operations}" SelectedValue="{Binding SelectedOperation, Mode=TwoWay}" SelectedIndex="0"/>
-		<ComboBox Grid.Row="5" Grid.Column="1" Height="25px" ItemsSource="{Binding Types}" SelectedValue="{Binding SelectedType, Mode=TwoWay}" SelectedIndex="0"/>
-	</Grid>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Protocol type (16)"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="ARP operation (16)"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Source MAC (48)"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Source IP (32)"/>
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Destination MAC (48)"/>
+		<TextBlock Grid.Row="5" Grid.Column="0" Text="Destination IP (32)"/>
+        <ComboBox Grid.Row="0" Grid.Column="1" Height="25px" ItemsSource="{Binding Types}" SelectedValue="{Binding SelectedType, Mode=TwoWay}" SelectedIndex="0"/>
+        <ComboBox Grid.Row="1" Grid.Column="1" Height="25px" ItemsSource="{Binding Operations}" SelectedValue="{Binding SelectedOperation, Mode=TwoWay}" SelectedIndex="0"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Height="25px" Text="{Binding SourceMAC}" Margin="0,3"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Height="25px" Text="{Binding SourceIP}" Margin="0,3"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Height="25px" Text="{Binding DestinationMAC}" Margin="0,3"/>
+		<TextBox Grid.Row="5" Grid.Column="1" Height="25px" Text="{Binding DestinationIP}" Margin="0,3"/>
+		</Grid>
 </UserControl>
