@@ -232,14 +232,11 @@ namespace PaketJunge.ViewModel
                     var ipv4ViewModel = (IPv4ViewModel)this.Layer3;
                     ipv4ViewModel.PropertyChanged += this.IPv4ViewModelPropertyChanged;
 
-                    var defaultGateway = this.GetDefaultIPv4Gateway();
                     var ipAddress = this.GetAssignedIPv4Address();
+                    var defaultGateway = this.GetDefaultIPv4Gateway();
 
-                    if (defaultGateway != null)
-                        ipv4ViewModel.DestinationIP = defaultGateway.ToString();
-
-                    if (ipAddress != null)
-                        ipv4ViewModel.SourceIP = ipAddress.ToString();
+                    ipv4ViewModel.SourceIP = ipAddress?.ToString();
+                    ipv4ViewModel.DestinationIP = defaultGateway?.ToString();
                 }
                 else if (type == EthernetType.IpV6.ToString())
                 {
