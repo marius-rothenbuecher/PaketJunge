@@ -3,7 +3,7 @@ GUI for building OSI layer oriented packets (Beta).
 
 Requires WinPcap https://www.winpcap.org/
 
-Current release: [Download](https://github.com/marius-rothenbuecher/PaketJunge/raw/master/PaketJunge_Beta.zip)
+Current release: [Download](http://bit.ly/2mRoZVy)
 
 Execute **PaketJunge.View.exe** to start.
 
