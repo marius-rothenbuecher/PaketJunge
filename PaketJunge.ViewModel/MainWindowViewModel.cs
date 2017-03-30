@@ -201,10 +201,15 @@ namespace PaketJunge.ViewModel
                     this.Layer2 = new EthernetViewModel();
 
                 string macAsByteStream = this.OpenDevice()?.MacAddress?.ToString();
-                string mac = this.GetMacAsString(macAsByteStream);
+                string sourceMac = this.GetMacAsString(macAsByteStream);
 
                 var ethernetViewModel = (EthernetViewModel)this.Layer2;
-                ethernetViewModel.SourceMAC = mac;
+                ethernetViewModel.SourceMAC = sourceMac;
+
+                var defaultGateway = this.GetDefaultIPv4Gateway();
+                var destinationMac = this.GetMACAddress(defaultGateway);
+                ethernetViewModel.DestinationMAC = destinationMac;
+
                 ethernetViewModel.PropertyChanged += this.EthernetViewModelPropertyChanged;
             }
             else
@@ -231,21 +236,10 @@ namespace PaketJunge.ViewModel
                     var ipAddress = this.GetAssignedIPv4Address();
 
                     if (defaultGateway != null)
-                    {
                         ipv4ViewModel.DestinationIP = defaultGateway.ToString();
-                        
-                        if (this.Layer2 is EthernetViewModel)
-                        {
-                            var ethernetViewModel = (EthernetViewModel)this.Layer2;
-                            var mac = this.GetMACAddress(defaultGateway);
-
-                            if (mac != null)
-                                ethernetViewModel.DestinationMAC = mac;
-                        }
-                    }
 
                     if (ipAddress != null)
-                        ipv4ViewModel.SourceIP = this.GetAssignedIPv4Address().ToString();
+                        ipv4ViewModel.SourceIP = ipAddress.ToString();
                 }
                 else if (type == EthernetType.IpV6.ToString())
                 {
@@ -257,7 +251,18 @@ namespace PaketJunge.ViewModel
                 }
                 else if (type == EthernetType.Arp.ToString())
                 {
-                    this.Layer3 = new ARPViewModel();
+                    var arpViewModel = new ARPViewModel();
+                    this.Layer3 = arpViewModel;
+
+                    if (this.Layer2 is EthernetViewModel)
+                    {
+                        var ethernetViewModel = (EthernetViewModel)this.Layer2;
+                        arpViewModel.SourceMAC = ethernetViewModel.SourceMAC;
+                        arpViewModel.DestinationMAC = ethernetViewModel.DestinationMAC;
+
+                        arpViewModel.SourceIP = this.GetAssignedIPv4Address()?.ToString();
+                    }
+
                     this.ClearLayers(4);
                 }
                 else if (type == EthernetType.PROFINETDCP.ToString())
