@@ -30,6 +30,7 @@ namespace PaketJunge.ViewModel
 		{
 			return new UdpLayer()
 			{
+                CalculateChecksumValue = true,
 				SourcePort = this.SourcePort,
 				DestinationPort = this.DestinationPort
 			};

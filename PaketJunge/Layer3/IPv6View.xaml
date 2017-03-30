@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="PaketJunge.View.IPv6View"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Height="260" MinWidth="500" Width="Auto" Padding="10px" FontWeight="Normal">
+        Height="205" MinWidth="500" Width="Auto" Padding="10px" FontWeight="Normal">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
